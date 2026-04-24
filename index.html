@@ -23,6 +23,7 @@
   --s:       #c2402a;
   --red:     #b83c2b;
   --g:       #1c4d8f;
+  --blue3:   #eaf2fb;
   /* ── Typography ── */
   --serif:   'Fraunces', Georgia, serif;
   --sans:    'DM Sans', system-ui, sans-serif;
@@ -1017,7 +1018,7 @@ html { scroll-behavior:smooth; }
 
 /* ══ G SECTION ════════════════════════════════════════════ */
 
-.g-slab  { background: #eaecf5; }
+.g-slab  { background: #eaecf5; min-height: 70vh; }
 .g-num   { color: var(--g); }
 .g-rule  { background: var(--g); }
 .g-pillar{ color: var(--g); }
@@ -1068,12 +1069,79 @@ html { scroll-behavior:smooth; }
 }
 
 /* Conflict section */
+/* ── G INTRO ── */
+.g-intro-block { max-width: 680px; margin: 0 auto 3rem; padding-top: 4vh; }
+.g-intro-body {
+  font-size: clamp(15px, 1.7vw, 17px);
+  line-height: 1.75; color: var(--ink);
+  margin-bottom: 1.1rem;
+}
+
+/* ── SHIFTS VISUAL ── */
+.g-shifts-wrap {
+  background: var(--blue3);
+  border: 1px solid #b8cfe8;
+  border-radius: 4px;
+  padding: 2rem 2rem 1.25rem;
+  width: 125%;
+  margin-left: -12.5%;
+  margin-bottom: 3.5rem;
+  overflow-x: auto;
+}
+.g-shifts-title {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  font-weight: 700; color: var(--g); margin-bottom: 1.25rem;
+}
+.g-shifts-table { min-width: 560px; }
+.g-shifts-header {
+  display: grid;
+  grid-template-columns: 120px 1fr 24px 1fr 24px 1fr;
+  gap: 0; margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--g);
+}
+.g-shifts-col-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--g);
+  text-align: center; padding: 0 .5rem;
+}
+.g-shifts-col-label.era-3 { color: #0d2d5e; }
+.g-shifts-col-arrow { display: flex; align-items: center; justify-content: center; color: var(--faint); font-size: 13px; }
+.g-shifts-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 24px 1fr 24px 1fr;
+  gap: 0;
+  border-bottom: 1px solid #c8ddf0;
+  padding: .85rem 0;
+  align-items: start;
+}
+.g-shifts-row:last-child { border-bottom: none; }
+.g-shifts-dim {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--g);
+  padding-right: 1rem; padding-top: .1rem; line-height: 1.4;
+}
+.g-shifts-cell {
+  font-size: 13px; line-height: 1.55; padding: 0 .75rem; color: var(--ink);
+}
+.g-shifts-cell-arrow {
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: .15rem; color: var(--faint); font-size: 13px;
+}
+.g-shifts-cell.level-low  { opacity: .75; }
+.g-shifts-cell.level-mid  { opacity: .9; }
+.g-shifts-cell.level-high { font-weight: 600; color: #0d2d5e; }
+.g-shifts-source {
+  font-size: 11px; color: var(--faint); margin-top: 1rem;
+  font-style: italic; text-align: right;
+}
+
 .g-conflict-section {
-  background: #f2f1f8;
+  background: var(--blue3);
   padding: 3vh 0;
-  border-top: 1px solid #d8d6ec;
-  border-bottom: 1px solid #d8d6ec;
-  margin: 2.5vh 0;
+  border-top: 1px solid #b8cfe8;
+  border-bottom: 1px solid #b8cfe8;
+  margin: 0;
 }
 .g-timeline-kicker {
   font-size: 10px; letter-spacing: .24em; text-transform: uppercase;
@@ -1087,7 +1155,7 @@ html { scroll-behavior:smooth; }
 .g-section-hed em { font-style: italic; font-weight: 400; color: var(--muted); }
 
 .g-research-card {
-  background: #fff; border: 1px solid #d8d6ec;
+  background: #fff; border: 1px solid #b8cfe8;
   border-left: 4px solid var(--g);
   padding: 1.5rem; margin: 2rem 0;
 }
@@ -1197,9 +1265,9 @@ html { scroll-behavior:smooth; }
 /* Honest positive G */
 .g-honest-section {
   background: #f0ede4;
-  padding: 2.5vh clamp(1.5rem, 6vw, 5rem);
+  padding: 0 clamp(1.5rem, 6vw, 5rem) 2.5vh;
 }
-.g-honest-inner { max-width: 840px; margin: 0 auto; }
+.g-honest-inner { max-width: 840px; margin: 0 auto; padding-top: 2.5vh; }
 .g-honest-kicker {
   font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
   font-weight: 600; color: var(--g); margin-bottom: 1.4rem;
@@ -2194,6 +2262,66 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
   </div>
 </div>
 
+<!-- BEAT 0: WHAT IS AI GOVERNANCE / WHY IT'S HARD -->
+<div class="col">
+  <div class="g-intro-block appear">
+    <p class="g-intro-body">Governance, in the ESG sense, is about accountability structures — who makes decisions, who can challenge them, and what happens when something goes wrong. For most of corporate history, that was hard enough. AI makes it structurally harder, in ways that compound with each generation of the technology.</p>
+    <p class="g-intro-body">Traditional software has defined inputs, defined outputs, and predictable failure modes. A broken system breaks the same way every time. AI systems don't. They behave differently across contexts, change as they're updated, and — in their agentic form — take actions rather than just producing outputs. That makes the standard governance toolkit — audits, policies, disclosure requirements — a poor fit for the thing it's supposed to govern.</p>
+  </div>
+
+  <!-- SHIFTS VISUAL -->
+  <div class="g-shifts-wrap appear">
+    <div class="g-shifts-title">How governance complexity scales with AI capability</div>
+    <div class="g-shifts-table">
+      <div class="g-shifts-header">
+        <div class="g-shifts-col-label"></div>
+        <div class="g-shifts-col-label era-1">Narrow AI</div>
+        <div class="g-shifts-col-arrow"></div>
+        <div class="g-shifts-col-label era-2">Generative AI</div>
+        <div class="g-shifts-col-arrow"></div>
+        <div class="g-shifts-col-label era-3">Agentic AI</div>
+      </div>
+
+      <div class="g-shifts-row">
+        <div class="g-shifts-dim">Risk assessment</div>
+        <div class="g-shifts-cell level-low">Clear when to assess. Defined inputs, defined scope.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-mid">Harder to determine. Outputs vary by prompt and context.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-high">When does assessment happen when the system keeps evolving its own behavior?</div>
+      </div>
+
+      <div class="g-shifts-row">
+        <div class="g-shifts-dim">Accountability</div>
+        <div class="g-shifts-cell level-low">Data scientists and engineers own it. Chain of responsibility is short.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-mid">End users and prompters share responsibility. Chain gets longer.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-high">Multi-agent, multi-vendor systems. No single owner. Accountability diffuses.</div>
+      </div>
+
+      <div class="g-shifts-row">
+        <div class="g-shifts-dim">Human oversight</div>
+        <div class="g-shifts-cell level-low">Human-in-the-loop is routine. Each decision has a clear review point.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-mid">Oversight requires more training. Humans often defer to model outputs.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-high">Systems act autonomously at speed. Meaningful oversight becomes a design problem, not a process one.</div>
+      </div>
+
+      <div class="g-shifts-row">
+        <div class="g-shifts-dim">Monitoring</div>
+        <div class="g-shifts-cell level-low">Fairly straightforward. Systems behave consistently. Anomalies are detectable.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-mid">Difficulty increases. Emergent behaviors require new monitoring approaches.</div>
+        <div class="g-shifts-cell-arrow">→</div>
+        <div class="g-shifts-cell level-high">Agents modify their own workflows. You're monitoring a moving target.</div>
+      </div>
+    </div>
+    <div class="g-shifts-source">Conceptual framework adapted from <em>The Ethical Nightmare Challenge</em></div>
+  </div>
+</div>
+
 <!-- BEAT 1: THE SCORING PROBLEM -->
 <div class="col">
 <div class="sec-open appear">
@@ -2226,29 +2354,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 </div>
 </div>
 
-<!-- BEAT 2: THE CONFLICT OF INTEREST -->
-<div class="g-conflict-section">
-  <div class="col">
-    <div class="g-timeline-kicker">The rater problem</div>
-    <h2 class="g-section-hed appear">The people scoring governance have a governance problem of their own.</h2>
-
-    <div class="prose">
-      <p>Here&rsquo;s something worth understanding about how ESG raters make money. Most of them sell their ratings to investors — not to the companies they&rsquo;re rating. That&rsquo;s supposed to reduce conflicts of interest. But many of the biggest raters also make money by licensing ESG index funds. Fund managers pay ongoing fees to use these indexes as benchmarks, and those fees grow when the fund attracts more investment. An index that looks both ethical <em>and</em> financially strong attracts more money. That creates a quiet incentive to rate high-performing companies favorably — regardless of their actual ESG behavior.</p>
-    </div>
-
-    <div class="g-research-card appear">
-      <div class="g-research-label">Columbia University &amp; Emory University — 2023</div>
-      <p class="g-research-finding">Researchers studied MSCI — which earns approximately <strong>60% of its revenue from its indexing business</strong>. They found that MSCI gives higher ESG ratings to companies with stronger stock returns, and that ESG upgrades and downgrades at MSCI do not track changes in underlying ESG performance.</p>
-      <p class="g-research-caveat">MSCI denied the findings, stating its ratings and index businesses operate with editorial independence. The structural incentive, however, remains.</p>
-    </div>
-
-    <div class="prose">
-      <p>Regulators are now trying to fix this. The EU passed a new ESG Rating Regulation that came into force in January 2025, requiring raters to separate their consulting and rating businesses. The UK is doing something similar, coming into effect in 2028. It&rsquo;s progress — but the incentive structures have been in place for years already.</p>
-    </div>
-  </div>
-</div>
-
-<!-- BEAT 3: THE ACCOUNTABILITY VACUUM -->
+<!-- BEAT 2: THE ACCOUNTABILITY VACUUM -->
 <div class="col">
 <div style="padding:3vh 0 1.5vh">
   <div class="g-timeline-kicker">The accountability gap</div>
@@ -2261,7 +2367,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     </div>
     <div style="padding:1.4rem 1.6rem">
       <div style="font-family:var(--serif);font-weight:900;font-size:clamp(1.1rem,2.2vw,1.4rem);color:var(--ink);margin-bottom:.8rem;line-height:1.25">The Dutch government deployed a fraud-detection algorithm. It destroyed 26,000 families. Then the government fell.</div>
-      <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">Starting in 2013, the Dutch tax authority used a self-learning algorithm to flag childcare benefit fraud. The system treated having dual nationality as a risk factor. <strong>Around 26,000 families — disproportionately from ethnic minority backgrounds — were wrongly accused.</strong> Repayment demands averaged €20,000–€60,000, due in full, with no payment plan options. A missed checkbox on a form was treated as evidence of intent to defraud. Once flagged, families were locked out of other benefits too. Children were taken into state care. Homes were lost.</p>
+      <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">Starting in 2013, the Dutch tax authority used a self-learning algorithm to flag childcare benefit fraud. The system treated having dual nationality as a risk factor. <strong>Around 26,000 families — disproportionately from ethnic minority backgrounds — were wrongly accused.</strong><sup><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener" class="cite">[42]</a></sup> Repayment demands averaged €20,000–€60,000, due in full, with no payment plan options. A missed checkbox on a form was treated as evidence of intent to defraud. Once flagged, families were locked out of other benefits too. Children were taken into state care. Homes were lost.</p>
       <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">No meaningful appeal process existed. Officials accepted the algorithm's output without review. The system ran for years before investigative journalists and a parliamentary inquiry exposed it.</p>
       <div style="border-top:1px solid #e8e4f0;padding-top:.9rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem">
         <div style="font-size:13px;color:#555;line-height:1.6"><strong style="color:var(--ink);display:block;margin-bottom:.2rem">January 15, 2021</strong>The Dutch cabinet resigned. It is the only case to date where an AI governance failure forced a government to fall.</div>
@@ -2297,6 +2403,21 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 </div>
 </div>
 
+<!-- BEAT 3b: DELOITTE $290K -->
+<div class="col" style="padding-bottom:0">
+<div style="padding:1.5vh 0 0">
+  <div class="g-example appear" style="margin-bottom:0">
+    <div class="g-example-year">July 2025</div>
+    <div>
+      <div class="g-example-co">The $290,000 hallucination</div>
+      <p class="g-example-text">Deloitte Australia was paid A$440,000 (~US$290,000) by the Australian government to audit a welfare IT system. The 237-page report was published on the Department of Employment’s website. A Sydney University researcher read it and immediately noticed something wrong: it cited a book by a named academic that didn’t exist, with a title “outside her field of expertise.” Further review found references to non-existent research papers throughout, and a fabricated quote attributed to a federal court judgment.</p>
+      <p class="g-example-text">Deloitte confirmed the errors and agreed to a partial refund. Their statement: <em>“The updates made in no way impact or affect the substantive content, findings and recommendations in the report.”</em> The revised version quietly added a disclosure that Azure OpenAI GPT-4o had been used in its creation.<sup><a href="https://fortune.com/2025/10/07/deloitte-ai-australia-government-report-hallucinations-technology-290000-refund/" target="_blank" rel="noopener" class="cite">[41]</a></sup></p>
+      <div class="g-example-verdict">The evidence base was fabricated. The recommendations stood.</div>
+    </div>
+  </div>
+</div>
+</div>
+
 <!-- BEAT 4: AGENTIC AI — THE REPLIT EXAMPLE -->
 <div class="g-agentic-section">
   <div class="col">
@@ -2326,7 +2447,29 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
   </div>
 </div>
 
-<!-- BEAT 5: HONEST POSITIVE -->
+<!-- BEAT 5: THE CONFLICT OF INTEREST -->
+<div class="g-conflict-section">
+  <div class="col">
+    <div class="g-timeline-kicker">The rater problem</div>
+    <h2 class="g-section-hed appear">The people scoring governance have a governance problem of their own.</h2>
+
+    <div class="prose">
+      <p>Here&rsquo;s something worth understanding about how ESG raters make money. Most of them sell their ratings to investors — not to the companies they&rsquo;re rating. That&rsquo;s supposed to reduce conflicts of interest. But many of the biggest raters also make money by licensing ESG index funds. Fund managers pay ongoing fees to use these indexes as benchmarks, and those fees grow when the fund attracts more investment. An index that looks both ethical <em>and</em> financially strong attracts more money. That creates a quiet incentive to rate high-performing companies favorably — regardless of their actual ESG behavior.</p>
+    </div>
+
+    <div class="g-research-card appear">
+      <div class="g-research-label">Columbia University &amp; Emory University — 2023</div>
+      <p class="g-research-finding">Researchers studied MSCI — which earns approximately <strong>60% of its revenue from its indexing business</strong>. They found that MSCI gives higher ESG ratings to companies with stronger stock returns, and that ESG upgrades and downgrades at MSCI do not track changes in underlying ESG performance.</p>
+      <p class="g-research-caveat">MSCI denied the findings, stating its ratings and index businesses operate with editorial independence. The structural incentive, however, remains.</p>
+    </div>
+
+    <div class="prose">
+      <p>Regulators are now trying to fix this. The EU passed a new ESG Rating Regulation that came into force in January 2025, requiring raters to separate their consulting and rating businesses. The UK is doing something similar, coming into effect in 2028. It&rsquo;s progress — but the incentive structures have been in place for years already.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BEAT 6: HONEST POSITIVE -->
 <div class="g-honest-section">
   <div class="g-honest-inner">
     <div class="g-honest-kicker appear">The other side</div>
@@ -3155,7 +3298,8 @@ document.addEventListener('DOMContentLoaded', openCiteTarget);
             <li id="src-38"><a href="https://www.fca.org.uk/news/press-releases/fca-sets-out-esg-rating-regulation-plans" target="_blank" rel="noopener">FCA (UK), December 2025 — conflict-of-interest rules, in force 2028</a></li>
             <li id="src-39"><a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/state-of-ai-trust-in-2026-shifting-to-the-agentic-era" target="_blank" rel="noopener">McKinsey 2026 AI Trust Maturity Survey — only ~33% of organizations have mature agentic governance</a></li>
             <li id="src-40"><a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" target="_blank" rel="noopener">Fortune, July 23, 2025 / <a href="https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/" target="_blank" rel="noopener">The Register</a> — Replit AI agent deleted production database; agent fabricated recovery response</a></li>
-            <li id="src-41"><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener">Amnesty International, October 2021</a> / <a href="https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal" target="_blank" rel="noopener">Dutch childcare benefits scandal</a> — Toeslagenaffaire: ~26,000 families wrongly accused; algorithm used nationality as fraud risk factor; Dutch cabinet resigned January 2021; repayment demands averaged €20,000–€60,000</li>
+            <li id="src-41"><a href="https://fortune.com/2025/10/07/deloitte-ai-australia-government-report-hallucinations-technology-290000-refund/" target="_blank" rel="noopener">Fortune, October 7, 2025</a> — Deloitte Australia $290,000 welfare audit report; fabricated citations and court judgment quote; Azure OpenAI GPT-4o used; partial refund agreed</li>
+            <li id="src-42"><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener">Amnesty International, October 2021</a> / <a href="https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal" target="_blank" rel="noopener">Dutch childcare benefits scandal</a> — Toeslagenaffaire: ~26,000 families wrongly accused; algorithm used nationality as fraud risk factor; Dutch cabinet resigned January 2021; repayment demands averaged €20,000–€60,000</li>
           </ol>
       </div>
     </details>
