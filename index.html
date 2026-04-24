@@ -2198,7 +2198,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 <!-- BEAT 1: THE SCORING PROBLEM -->
 <div class="col">
 <div class="sec-open appear">
-  <p>Here&rsquo;s how ESG governance scores mostly work: <strong>a company publishes a policy, and gets credit for having that policy.</strong> Whether anyone is actually following it, enforcing it, or whether it still exists at all — that&rsquo;s much harder to measure. And that&rsquo;s exactly where AI governance is falling through the cracks.</p>
+  <p>ESG governance scores are mostly built on disclosure. A company writes an AI ethics policy, publishes it, and receives credit for having one. Whether the policy is enforced, whether anyone reviews it after it's written, or whether it was quietly shelved when it became inconvenient — none of that shows up in a standard score. This is the central weakness of how AI governance gets measured: <strong>the output being tracked is documentation, not behavior.</strong></p>
 </div>
 
 <!-- Meta callout -->
@@ -2215,11 +2215,11 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 
 <!-- RATER DIVERGENCE visual -->
 <div class="g-divergence-wrap appear" id="g-div-trigger">
-  <div class="g-divergence-kicker">The same company. The same year. Two major raters.</div>
+  <div class="g-divergence-kicker">Tesla vs. ExxonMobil. Same year. Two major ESG raters. Opposite conclusions.</div>
   <div class="g-divergence-stage">
     <svg id="g-div-svg" width="100%" style="display:block;overflow:visible"></svg>
   </div>
-  <div class="g-divergence-note">ESG rating correlations range from 0.38 to 0.71 across major agencies (Berg et al., 2022). Credit rating agencies correlate at 0.99. Source: MIT Sloan Management Review</div>
+  <div class="g-divergence-note">In 2022, S&P removed Tesla from its ESG Index while MSCI gave it an "A" rating. ExxonMobil was retained by S&P and rated similarly by MSCI — despite being an oil major. Scores above are illustrative of the documented divergence range. ESG rating correlations across agencies: 0.38–0.71 (Berg et al., 2022). Credit ratings: 0.99.</div>
 </div>
 
 <div class="prose">
@@ -2255,10 +2255,30 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
   <div class="g-timeline-kicker">The accountability gap</div>
   <h2 class="g-section-hed appear">When AI makes a consequential decision, who is responsible?</h2>
 
+  <!-- Dutch toeslagenaffaire -->
+  <div class="appear" style="background:#fff;border:1px solid #d8d6ec;border-radius:6px;overflow:hidden;margin-bottom:1.8rem">
+    <div style="background:#1c4d8f;padding:.7rem 1.4rem;display:flex;align-items:center;gap:.8rem">
+      <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600">Scale &nbsp;·&nbsp; Netherlands, 2013–2021</div>
+    </div>
+    <div style="padding:1.4rem 1.6rem">
+      <div style="font-family:var(--serif);font-weight:900;font-size:clamp(1.1rem,2.2vw,1.4rem);color:var(--ink);margin-bottom:.8rem;line-height:1.25">The Dutch government deployed a fraud-detection algorithm. It destroyed 26,000 families. Then the government fell.</div>
+      <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">Starting in 2013, the Dutch tax authority used a self-learning algorithm to flag childcare benefit fraud. The system treated having dual nationality as a risk factor. <strong>Around 26,000 families — disproportionately from ethnic minority backgrounds — were wrongly accused.</strong> Repayment demands averaged €20,000–€60,000, due in full, with no payment plan options. A missed checkbox on a form was treated as evidence of intent to defraud. Once flagged, families were locked out of other benefits too. Children were taken into state care. Homes were lost.</p>
+      <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">No meaningful appeal process existed. Officials accepted the algorithm's output without review. The system ran for years before investigative journalists and a parliamentary inquiry exposed it.</p>
+      <div style="border-top:1px solid #e8e4f0;padding-top:.9rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div style="font-size:13px;color:#555;line-height:1.6"><strong style="color:var(--ink);display:block;margin-bottom:.2rem">January 15, 2021</strong>The Dutch cabinet resigned. It is the only case to date where an AI governance failure forced a government to fall.</div>
+        <div style="font-size:13px;color:#555;line-height:1.6"><strong style="color:var(--ink);display:block;margin-bottom:.2rem">What the investigation found</strong>The scandal was not caused by a faulty algorithm. It was caused by the <em>absence of governance</em> — no oversight, no audit trail, no human review, no right of appeal.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-bottom:1.4rem">
+    <p>The Dutch case is the largest documented example of algorithmic governance failure to date. But the pattern it illustrates — an automated system making consequential decisions with no meaningful oversight, no explainability, and no accountability structure — isn't unique to governments. It's the same structure that most corporate AI deployments currently operate under.</p>
+  </div>
+
   <!-- Air Canada case -->
   <div class="g-case appear">
     <div class="g-case-header">
-      <div class="g-case-label">Case study &nbsp;·&nbsp; who's accountable when AI gets it wrong?</div>
+      <div class="g-case-label">Case study &nbsp;·&nbsp; the small-stakes version of the same problem</div>
       <div class="g-case-title">Moffatt v. Air Canada, 2024 BCCRT 149<sup><a href="https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html" target="_blank" rel="noopener" class="cite">[16]</a></sup></div>
     </div>
     <div class="g-case-body">
@@ -2282,7 +2302,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 <div class="g-agentic-section">
   <div class="col">
     <div class="g-timeline-kicker">Agentic AI &nbsp;/&nbsp; one step further</div>
-    <h2 class="g-section-hed appear">The chatbot answered a question. Agentic AI takes actions — without being asked each time.</h2>
+    <h2 class="g-section-hed appear">The Air Canada case involved a chatbot that gave wrong information. Agentic AI raises a harder question: who is responsible when a system acts on its own?</h2>
 
     <div class="prose">
       <p>This is where governance gets genuinely hard. Agentic AI systems don&rsquo;t just answer questions — they take actions. They can browse websites, write and run code, send emails, and modify files, often without a human approving each step. In 2025, 79% of organizations had already deployed AI agents in at least one workflow. 80% of them encountered risky or unexpected behavior. Only a third had mature governance frameworks to deal with it.</p>
@@ -2336,7 +2356,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     </div>
 
     <div class="g-closing appear">
-      <p>The tools to do governance better exist — pattern detection, contract analysis, continuous monitoring. The gap isn&rsquo;t technical. It&rsquo;s that most ESG scoring still relies on self-reported data, most governance disclosures still reflect policies rather than enforcement, and most organizations deploying AI agents haven&rsquo;t updated their accountability frameworks to match. The technology is available. The institutional will to use it rigorously is still catching up.</p>
+      <p>The tools to do governance better exist — pattern detection, contract analysis, continuous monitoring. What's notable is that the same technology creating the governance gap is also capable of closing it. AI can audit AI behavior at a scale and frequency that no human team can match. The problem isn't that the tools are unavailable. It's that most organizations are deploying AI faster than they are deploying the oversight infrastructure for it — and most ESG frameworks are still scoring the documentation, not the gap between the two.</p>
     </div>
   </div>
 </div>
@@ -2924,11 +2944,11 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
     svg.innerHTML = '';
 
     // Two companies, each rated by two raters
-    // Company A: Rater 1 = 72, Rater 2 = 31  (same company!)
-    // Company B: Rater 1 = 45, Rater 2 = 68
+    // Tesla: S&P excluded, MSCI rated "A" (average)
+    // ExxonMobil: S&P included (top 10), MSCI rated similar to Tesla
     const companies = [
-      { name:'Company A', r1:72, r2:31 },
-      { name:'Company B', r1:45, r2:68 },
+      { name:'Tesla', r1:72, r2:31 },
+      { name:'ExxonMobil', r1:45, r2:68 },
     ];
     const c1 = '#1c4d8f', c2 = '#c2402a';
     const LABEL_W = 100, TRACK_W = W - LABEL_W - 60, ROW_H = 44, GAP = 18;
@@ -3077,9 +3097,10 @@ document.addEventListener('DOMContentLoaded', openCiteTarget);
         Three pillars. Three versions of the same problem.
       </h2>
       <div class="conclusion-body">
-        <p>Each of these three pillars tells a version of the same story. AI is increasing energy demand and providing tools to reduce it — at the same time. It&rsquo;s eliminating certain jobs and creating new ones — but not for the same people. It&rsquo;s making governance easier to automate and harder to hold accountable — simultaneously.</p>
+        <p>Each section tells a version of the same story. AI is increasing energy demand and providing tools to reduce it — simultaneously. It&rsquo;s eliminating certain jobs and creating others — but not for the same people. It&rsquo;s making some aspects of governance easier to automate while making accountability harder to locate.</p>
         <p>The frameworks companies use to measure and report on all of this were designed before AI existed. They were built around the idea that a human made every significant decision, that accountability had a face, and that annual disclosures were a reasonable proxy for actual behavior. None of those assumptions hold anymore.</p>
-        <p><strong>The organizations that navigate this well won&rsquo;t be the ones with the best AI ethics policy written on a slide. They&rsquo;ll be the ones actually measuring both sides of each of these equations — and being honest about what they find.</strong></p>
+        <p>The Dutch childcare algorithm ran for eight years before anyone was held accountable. Meta disbanded its Responsible AI team and received no governance downgrade. The hyperscalers are spending $700 billion on infrastructure while their ESG scores reflect published policies, not power consumption. The gap between what ESG frameworks measure and what AI is actually doing is wide — and it is currently widening faster than the frameworks are updating.</p>
+        <p><strong>That gap is where this report lives. And closing it requires organizations to measure what AI is actually doing — not just what their policies say about it.</strong></p>
       </div>
     </div>
   </div>
@@ -3135,6 +3156,7 @@ document.addEventListener('DOMContentLoaded', openCiteTarget);
             <li id="src-38"><a href="https://www.fca.org.uk/news/press-releases/fca-sets-out-esg-rating-regulation-plans" target="_blank" rel="noopener">FCA (UK), December 2025 — conflict-of-interest rules, in force 2028</a></li>
             <li id="src-39"><a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/state-of-ai-trust-in-2026-shifting-to-the-agentic-era" target="_blank" rel="noopener">McKinsey 2026 AI Trust Maturity Survey — only ~33% of organizations have mature agentic governance</a></li>
             <li id="src-40"><a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" target="_blank" rel="noopener">Fortune, July 23, 2025 / <a href="https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/" target="_blank" rel="noopener">The Register</a> — Replit AI agent deleted production database; agent fabricated recovery response</a></li>
+            <li id="src-41"><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener">Amnesty International, October 2021</a> / <a href="https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal" target="_blank" rel="noopener">Dutch childcare benefits scandal</a> — Toeslagenaffaire: ~26,000 families wrongly accused; algorithm used nationality as fraud risk factor; Dutch cabinet resigned January 2021; repayment demands averaged €20,000–€60,000</li>
           </ol>
       </div>
     </details>
