@@ -544,7 +544,7 @@ html { scroll-behavior:smooth; }
 .scale-title {
   font-family:var(--sans); font-size:10px; letter-spacing:.24em;
   text-transform:uppercase; font-weight:600; color:var(--muted);
-  margin-bottom: 1.8rem;
+  margin-bottom: 0.8rem;
 }
 
 /* log row CSS replaced by SVG */
@@ -2599,7 +2599,7 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
 
     // axis note — TOP, before anything else
     const note = document.createElementNS(NS, 'text');
-    note.setAttribute('x', chartL); note.setAttribute('y', 13);
+    note.setAttribute('x', chartL); note.setAttribute('y', 9);
     note.setAttribute('font-family', 'Caveat,cursive'); note.setAttribute('font-size', '13');
     note.setAttribute('fill', '#999');
     note.textContent = '← each step = 10× more energy';
@@ -2609,7 +2609,7 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
     ticks.forEach((v, i) => {
       const x = xPos(v);
       const tl = document.createElementNS(NS, 'text');
-      tl.setAttribute('x', x); tl.setAttribute('y', 30);
+      tl.setAttribute('x', x); tl.setAttribute('y', 24);
       tl.setAttribute('text-anchor', 'middle');
       tl.setAttribute('font-family', 'DM Sans,sans-serif');
       tl.setAttribute('font-size', '10');
