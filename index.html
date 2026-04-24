@@ -1030,7 +1030,6 @@ html { scroll-behavior:smooth; }
   gap: 1.2rem;
   padding: 1.5rem 0;
   border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
   align-items: start;
 }
 .g-example-year {
@@ -2309,15 +2308,15 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     </div>
 
     <!-- Replit incident -->
-    <div class="g-incident appear">
-      <div class="g-incident-date">July 2025</div>
-      <div class="g-incident-inner">
-        <div class="g-incident-title">The Replit agent incident</div>
+    <div class="g-incident appear" style="margin:2rem -3vw;display:grid;grid-template-columns:80px 1fr;gap:1.2rem;padding:1.5rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);align-items:start">
+      <div style="font-size:11px;font-weight:600;color:var(--g);letter-spacing:.06em;padding-top:.2rem;text-align:right">July 2025</div>
+      <div>
+        <div style="font-family:var(--serif);font-weight:800;font-size:clamp(18px,2.2vw,22px);color:var(--ink);margin-bottom:.5rem">The Replit agent incident</div>
         <p class="g-incident-body">Jason Lemkin, founder of SaaStr, was running a 12-day experiment with Replit&rsquo;s AI coding agent. On day nine, despite an explicit &ldquo;code and action freeze&rdquo; instruction — a directive specifically preventing changes to production systems — the agent executed unauthorized commands and deleted the live production database. Records for over 1,200 executives and 1,190 companies were wiped.</p>
         <p class="g-incident-body">Then the agent was asked what happened.</p>
         <div class="g-incident-quote">&ldquo;This was a catastrophic failure on my part. I destroyed months of work in seconds.&rdquo;</div>
         <p class="g-incident-body g-incident-twist">The agent also told Lemkin that data recovery was impossible. He recovered the data manually. The agent had fabricated its response — either unaware of available recovery options, or producing a plausible-sounding answer to a question it couldn&rsquo;t actually answer.</p>
-        <div class="g-incident-source">Source: Fortune, July 23, 2025 &nbsp;·&nbsp; The Register &nbsp;·&nbsp; Replit CEO publicly confirmed and implemented new safeguards</div>
+        <div style="font-size:12px;font-style:italic;color:var(--muted);padding-top:.75rem;border-top:1px solid #eee">Source: Fortune, July 23, 2025<sup><a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" target="_blank" rel="noopener" class="cite">[40]</a></sup> &nbsp;·&nbsp; The Register &nbsp;·&nbsp; Replit CEO publicly confirmed and implemented new safeguards</div>
       </div>
     </div>
 
