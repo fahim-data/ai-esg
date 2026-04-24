@@ -2267,8 +2267,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 <!-- BEAT 0: WHAT IS AI GOVERNANCE / WHY IT'S HARD -->
 <div class="col">
   <div class="g-intro-block appear">
-    <p class="g-intro-body">Governance, in the ESG sense, is about accountability structures — who makes decisions, who can challenge them, and what happens when something goes wrong. For most of corporate history, that was hard enough. AI makes it structurally harder, in ways that compound with each generation of the technology.</p>
-    <p class="g-intro-body">Traditional software has defined inputs, defined outputs, and predictable failure modes. A broken system breaks the same way every time. AI systems don't. They behave differently across contexts, change as they're updated, and — in their agentic form — take actions rather than just producing outputs. That makes the standard governance toolkit — audits, policies, disclosure requirements — a poor fit for the thing it's supposed to govern.</p>
+    <p class="g-intro-body">Governance, in the ESG sense, is about accountability structures — who makes decisions, who can challenge them, and what happens when something goes wrong. Traditional software has defined inputs, defined outputs, and predictable failure modes — a broken system breaks the same way every time. AI doesn't. It behaves differently across contexts, changes as it's updated, and — in its agentic form — takes actions rather than just answering questions. That makes the standard governance toolkit — audits, policies, disclosure requirements — a poor fit for the thing it's supposed to govern.</p>
   </div>
 
   <!-- SHIFTS VISUAL -->
@@ -2369,17 +2368,13 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     </div>
     <div style="padding:1.4rem 1.6rem">
       <div style="font-family:var(--serif);font-weight:900;font-size:clamp(1.1rem,2.2vw,1.4rem);color:var(--ink);margin-bottom:.8rem;line-height:1.25">The Dutch government deployed a fraud-detection algorithm. It destroyed 26,000 families. Then the government fell.</div>
-      <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">Starting in 2013, the Dutch tax authority used a self-learning algorithm to flag childcare benefit fraud. The system treated having dual nationality as a risk factor. <strong>Around 26,000 families — disproportionately from ethnic minority backgrounds — were wrongly accused.</strong><sup><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener" class="cite">[42]</a></sup> Repayment demands averaged €20,000–€60,000, due in full, with no payment plan options. A missed checkbox on a form was treated as evidence of intent to defraud. Once flagged, families were locked out of other benefits too. Children were taken into state care. Homes were lost.</p>
+      <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">Starting in 2013, the Dutch tax authority used a self-learning algorithm to flag childcare benefit fraud. The system treated having dual nationality as a risk factor. <strong>Around 26,000 families — disproportionately from ethnic minority backgrounds — were wrongly accused.</strong><sup><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener" class="cite">[42]</a></sup> Repayment demands averaged €20,000–€60,000, due in full, with no payment plan options. Once flagged, families were locked out of other benefits.</p>
       <p style="font-size:14.5px;line-height:1.78;color:#444;margin:0 0 .9rem">No meaningful appeal process existed. Officials accepted the algorithm's output without review. The system ran for years before investigative journalists and a parliamentary inquiry exposed it.</p>
       <div style="border-top:1px solid #e8e4f0;padding-top:.9rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem">
         <div style="font-size:13px;color:#555;line-height:1.6"><strong style="color:var(--ink);display:block;margin-bottom:.2rem">January 15, 2021</strong>The Dutch cabinet resigned. It is the only case to date where an AI governance failure forced a government to fall.</div>
         <div style="font-size:13px;color:#555;line-height:1.6"><strong style="color:var(--ink);display:block;margin-bottom:.2rem">What the investigation found</strong>The scandal was not caused by a faulty algorithm. It was caused by the <em>absence of governance</em> — no oversight, no audit trail, no human review, no right of appeal.</div>
       </div>
     </div>
-  </div>
-
-  <div class="prose" style="margin-bottom:1.4rem">
-    <p>The Dutch case is the largest documented example of algorithmic governance failure to date. But the pattern it illustrates — an automated system making consequential decisions with no meaningful oversight, no explainability, and no accountability structure — isn't unique to governments. It's the same structure that most corporate AI deployments currently operate under.</p>
   </div>
 
   <!-- Air Canada case -->
@@ -2400,27 +2395,55 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
   </div>
 
   <div class="prose">
-    <p>The Air Canada case had a clear outcome. Most real-world AI accountability gaps don&rsquo;t. They get passed between the company, the vendor, the engineering team, and the model itself — with no clear audit trail and no obvious place where responsibility lands. Courts are starting to establish that the organization deploying AI is always responsible. Governance frameworks are still catching up to that principle.</p>
+    <p>The Air Canada case had a clear outcome. Most AI accountability gaps don't — responsibility diffuses between company, vendor, and model with no obvious place where it lands. Courts are establishing that the deploying organization is always liable. Governance frameworks are still catching up.</p>
+  </div>
+
+  <!-- Klarna case -->
+  <div class="g-case appear">
+    <div class="g-case-header">
+      <div class="g-case-label">Case study &nbsp;·&nbsp; when AI customer service fails at scale</div>
+      <div class="g-case-title">Klarna, 2023–2025</div>
+    </div>
+    <div class="g-case-body">
+      <p>In 2023, Klarna replaced approximately 700 customer service workers with an AI chatbot built with OpenAI. The company reported the bot handled over 2.3 million conversations in its first month. The CEO called it one of the most successful enterprise AI deployments in history.</p>
+      <p>By 2025, customer complaints had risen and satisfaction scores had fallen. Users described responses as generic, repetitive, and unable to handle anything beyond simple queries. CEO Sebastian Siemiatkowski reversed course and began rehiring humans.</p>
+      <div class="g-case-ruling">
+        <div class="g-case-ruling-label">CEO statement &nbsp;·&nbsp; May 2025</div>
+        <p>&ldquo;We went too far. The result was lower quality, and that&rsquo;s not sustainable. It&rsquo;s so critical that customers know there will always be a human if they want one.&rdquo;</p>
+        <div class="g-case-ruling-attr">— Sebastian Siemiatkowski, CEO, Klarna</div>
+      </div>
+      <p class="g-case-outcome">The efficiency gains were real. The customer experience cost wasn't measured until it showed up in satisfaction data. Klarna is not alone — a 2025 Forrester survey found 55% of companies that replaced workers with AI regret the decision.<sup><a href="https://fortune.com/2025/05/09/klarna-ai-humans-return-on-investment/" target="_blank" rel="noopener" class="cite">[45]</a></sup></p>
+    </div>
   </div>
 </div>
 </div>
 
-<!-- BEAT 3b: DELOITTE $290K -->
+<!-- BEAT 3b: DELOITTE + MATA -->
 <div class="col" style="padding-bottom:0">
 <div style="padding:1.5vh 0 0">
   <div class="g-example appear" style="margin-bottom:0">
     <div class="g-example-year">July 2025</div>
     <div>
       <div class="g-example-co">The $290,000 hallucination</div>
-      <p class="g-example-text">Deloitte Australia was paid A$440,000 (~US$290,000) by the Australian government to audit a welfare IT system. The 237-page report was published on the Department of Employment’s website. A Sydney University researcher read it and immediately noticed something wrong: it cited a book by a named academic that didn’t exist, with a title “outside her field of expertise.” Further review found references to non-existent research papers throughout, and a fabricated quote attributed to a federal court judgment.</p>
-      <p class="g-example-text">Deloitte confirmed the errors and agreed to a partial refund. Their statement: <em>“The updates made in no way impact or affect the substantive content, findings and recommendations in the report.”</em> The revised version quietly added a disclosure that Azure OpenAI GPT-4o had been used in its creation.<sup><a href="https://fortune.com/2025/10/07/deloitte-ai-australia-government-report-hallucinations-technology-290000-refund/" target="_blank" rel="noopener" class="cite">[41]</a></sup></p>
+      <p class="g-example-text">Deloitte Australia was paid A$440,000 (~US$290,000) to audit a government welfare IT system. A Sydney University researcher reading the published 237-page report found citations to a non-existent book, references to non-existent research papers throughout, and a fabricated quote attributed to a federal court judgment. Deloitte confirmed the errors, agreed to a partial refund, and quietly added a disclosure that Azure OpenAI GPT-4o had been used in the report&rsquo;s creation.<sup><a href="https://fortune.com/2025/10/07/deloitte-ai-australia-government-report-hallucinations-technology-290000-refund/" target="_blank" rel="noopener" class="cite">[41]</a></sup></p>
       <div class="g-example-verdict">The evidence base was fabricated. The recommendations stood.</div>
+    </div>
+  </div>
+
+  <!-- Mata v. Avianca -->
+  <div class="g-example appear" style="margin-top:1.5rem;margin-bottom:0">
+    <div class="g-example-year">June 2023</div>
+    <div>
+      <div class="g-example-co">Mata v. Avianca &mdash; hallucinations in court</div>
+      <p class="g-example-text">Lawyers used ChatGPT to draft a legal brief against airline Avianca. ChatGPT generated six court citations &mdash; case names, docket numbers, judicial quotes &mdash; that did not exist. When opposing counsel flagged they couldn&rsquo;t locate the cases, the lawyers submitted copies of the fake &ldquo;opinions&rdquo; to the court. Federal Judge P. Kevin Castel sanctioned the attorneys $5,000 each, describing one fabricated analysis as &ldquo;gibberish.&rdquo; The lawyers&rsquo; defence: they were &ldquo;operating under the false perception that ChatGPT could not possibly be fabricating cases.&rdquo;</p>
+      <p class="g-example-text">In the 30 months following the ruling, at least 15 more cases involved attorneys submitting AI-generated briefs with fabricated citations &mdash; the same pattern of AI-generated content treated as fact by the people responsible for verifying it.</p>
+      <div class="g-example-verdict">The data quality failure didn&rsquo;t stay internal. It entered a federal court proceeding.<sup><a href="https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc." target="_blank" rel="noopener" class="cite">[44]</a></sup></div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- BEAT 4: AGENTIC AI — THE REPLIT EXAMPLE -->
+<!-- BEAT 4: AGENTIC AI -->
 <div class="g-agentic-section">
   <div class="col">
     <div class="g-timeline-kicker">Agentic AI &nbsp;/&nbsp; one step further</div>
@@ -2443,8 +2466,20 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
       </div>
     </div>
 
+    <!-- OpenClaw / Summer Yue incident -->
+    <div class="g-incident appear" style="margin:2rem -3vw;display:grid;grid-template-columns:80px 1fr;gap:1.2rem;padding:1.5rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);align-items:start">
+      <div style="font-size:11px;font-weight:600;color:var(--g);letter-spacing:.06em;padding-top:.2rem;text-align:right">February 2026</div>
+      <div>
+        <div style="font-family:var(--serif);font-weight:800;font-size:clamp(18px,2.2vw,22px);color:var(--ink);margin-bottom:.5rem">The OpenClaw incident</div>
+        <p class="g-incident-body">Summer Yue is Director of Alignment at Meta Superintelligence Labs — her job, as she describes it, is ensuring powerful AI systems are aligned with human values. In February 2026, she connected OpenClaw, an autonomous AI agent, to her inbox with an explicit instruction: confirm before taking any action. The agent began bulk-deleting emails. She sent "Stop," "Do not do that," "STOP OPENCLAW." It continued. She could not stop it from her phone.</p>
+        <div class="g-incident-quote">&ldquo;Nothing humbles you like telling your OpenClaw &lsquo;confirm before acting&rsquo; and watching it speedrun deleting your inbox. I had to RUN to my Mac mini like I was defusing a bomb.&rdquo;</div>
+        <p class="g-incident-body g-incident-twist">The root cause: OpenClaw's context window compaction — the process the agent uses to manage memory — silently stripped out her safety instruction when it hit the larger inbox. The constraint wasn't deleted by a bug. It was summarized away by the agent's own memory management.</p>
+        <div style="font-size:12px;font-style:italic;color:var(--muted);padding-top:.75rem;border-top:1px solid #eee">Source: Summer Yue on X, February 22, 2026<sup><a href="https://www.fastcompany.com/91497841/meta-superintelligence-lab-ai-safety-alignment-director-lost-control-of-agent-deleted-her-emails" target="_blank" rel="noopener" class="cite">[43]</a></sup> &nbsp;·&nbsp; Fast Company &nbsp;·&nbsp; Tom's Hardware &nbsp;·&nbsp; Windows Central</div>
+      </div>
+    </div>
+
     <div class="prose">
-      <p>McKinsey put it clearly in March 2026: <strong>&ldquo;Agency isn&rsquo;t a feature<sup><a href="https://www.mckinsey.com/capabilities/risk-and-resilience/our-insights/trust-in-the-age-of-agents" target="_blank" rel="noopener" class="cite">[13]</a></sup> — it&rsquo;s a transfer of decision rights.&rdquo;</strong> When you deploy an AI agent, you&rsquo;re not just buying a tool. You&rsquo;re handing over decision-making authority to a system that doesn&rsquo;t fully understand context, consequences, or when to stop. The EU AI Act<sup><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener" class="cite">[14]</a></sup> now requires high-risk AI systems to maintain effective human oversight. But what &ldquo;effective&rdquo; means when a system is making thousands of decisions per hour — that&rsquo;s a question regulators haven&rsquo;t fully answered yet.</p>
+      <p>McKinsey put it clearly in March 2026: <strong>&ldquo;Agency isn&rsquo;t a feature<sup><a href="https://www.mckinsey.com/capabilities/risk-and-resilience/our-insights/trust-in-the-age-of-agents" target="_blank" rel="noopener" class="cite">[13]</a></sup> — it&rsquo;s a transfer of decision rights.&rdquo;</strong> When you deploy an AI agent, you&rsquo;re handing over decision-making authority to a system that doesn&rsquo;t understand context, consequences, or when to stop. The EU AI Act<sup><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener" class="cite">[14]</a></sup> requires effective human oversight for high-risk systems — but what &ldquo;effective&rdquo; means at scale is a question regulators are still working out.</p>
     </div>
   </div>
 </div>
@@ -2456,7 +2491,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     <h2 class="g-section-hed appear">The people scoring governance have a governance problem of their own.</h2>
 
     <div class="prose">
-      <p>Here&rsquo;s something worth understanding about how ESG raters make money. Most of them sell their ratings to investors — not to the companies they&rsquo;re rating. That&rsquo;s supposed to reduce conflicts of interest. But many of the biggest raters also make money by licensing ESG index funds. Fund managers pay ongoing fees to use these indexes as benchmarks, and those fees grow when the fund attracts more investment. An index that looks both ethical <em>and</em> financially strong attracts more money. That creates a quiet incentive to rate high-performing companies favorably — regardless of their actual ESG behavior.</p>
+      <p>Most ESG raters sell their ratings to investors, not the companies they rate — that&rsquo;s supposed to prevent conflicts of interest. But many also license ESG index funds, collecting ongoing fees that grow when their funds attract more investment. An index that looks both ethical <em>and</em> financially strong attracts more money. That creates a quiet incentive to rate high-performing companies favorably &mdash; regardless of their actual ESG behavior.</p>
     </div>
 
     <div class="g-research-card appear">
@@ -3302,6 +3337,9 @@ document.addEventListener('DOMContentLoaded', openCiteTarget);
             <li id="src-40"><a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" target="_blank" rel="noopener">Fortune, July 23, 2025 / <a href="https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/" target="_blank" rel="noopener">The Register</a> — Replit AI agent deleted production database; agent fabricated recovery response</a></li>
             <li id="src-41"><a href="https://fortune.com/2025/10/07/deloitte-ai-australia-government-report-hallucinations-technology-290000-refund/" target="_blank" rel="noopener">Fortune, October 7, 2025</a> — Deloitte Australia $290,000 welfare audit report; fabricated citations and court judgment quote; Azure OpenAI GPT-4o used; partial refund agreed</li>
             <li id="src-42"><a href="https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/" target="_blank" rel="noopener">Amnesty International, October 2021</a> / <a href="https://en.wikipedia.org/wiki/Dutch_childcare_benefits_scandal" target="_blank" rel="noopener">Dutch childcare benefits scandal</a> — Toeslagenaffaire: ~26,000 families wrongly accused; algorithm used nationality as fraud risk factor; Dutch cabinet resigned January 2021; repayment demands averaged €20,000–€60,000</li>
+            <li id="src-43"><a href="https://www.fastcompany.com/91497841/meta-superintelligence-lab-ai-safety-alignment-director-lost-control-of-agent-deleted-her-emails" target="_blank" rel="noopener">Fast Company, February 24, 2026</a> — Summer Yue (Director of Alignment, Meta Superintelligence Labs) OpenClaw agent bulk-deleted 200+ emails despite explicit stop instructions; context window compaction stripped safety constraint; she had to physically terminate the process</li>
+            <li id="src-44"><a href="https://en.wikipedia.org/wiki/Mata_v._Avianca,_Inc." target="_blank" rel="noopener">Mata v. Avianca, Inc., 678 F.Supp.3d 443 (S.D.N.Y. 2023)</a> — ChatGPT hallucinated six court case citations; lawyers submitted fake "opinions" to federal court; Judge Castel sanctioned attorneys $5,000 each; at least 15 similar cases followed</li>
+            <li id="src-45"><a href="https://fortune.com/2025/05/09/klarna-ai-humans-return-on-investment/" target="_blank" rel="noopener">Fortune, May 9, 2025</a> / <a href="https://www.bloomberg.com/news/articles/2025-05-08/klarna-turns-from-ai-to-real-person-customer-service" target="_blank" rel="noopener">Bloomberg</a> — Klarna replaced ~700 customer service workers with AI (2023); customer satisfaction declined; CEO admitted "lower quality" and began rehiring humans (2025)</li>
           </ol>
       </div>
     </details>
