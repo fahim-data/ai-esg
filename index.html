@@ -128,6 +128,133 @@ body::before {
   align-self: center;
 }
 
+/* ── COVER COUNTER ── */
+.cover-counter-wrap {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+.cover-counter-label {
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: rgba(255,255,255,.7);
+  letter-spacing: .02em;
+  margin-bottom: .6rem;
+  font-family: var(--sans);
+}
+.cover-counter-num {
+  font-family: var(--serif);
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 900;
+  line-height: 1;
+  color: #4ade80;
+  letter-spacing: -.03em;
+}
+.cover-counter-unit {
+  font-size: clamp(22px, 3vw, 36px);
+  opacity: .6;
+}
+.cover-counter-sub {
+  font-size: clamp(12px, 1.2vw, 14px);
+  color: rgba(255,255,255,.55);
+  letter-spacing: .03em;
+  margin-top: .8rem;
+  font-family: var(--sans);
+}
+
+/* ── ICON HOVER FOCUS ── */
+.reveal-hint {
+  font-size: 13px; letter-spacing: .04em;
+  color: var(--muted); font-weight: 500;
+  margin: 1.5vh 0 0; text-align: center;
+  transition: opacity .3s ease;
+  font-family: var(--sans);
+  animation: hintPulse 2s ease-in-out infinite;
+}
+@keyframes hintPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(1.04); }
+}
+
+/* trio items */
+.trio-item {
+  cursor: pointer;
+  transition: opacity .3s ease, transform .3s ease;
+}
+.trio-illo { transition: transform .25s ease; }
+
+/* default: all visible */
+.trio { transition: opacity .3s ease; }
+
+/* trio-wrap stacks both states in same space */
+.trio-wrap {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+.trio-wrap > .trio,
+.trio-wrap > .trio-focus-panel {
+  grid-column: 1;
+  grid-row: 1;
+}
+.trio-wrap > .reveal-trigger {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* default: trio visible, panel hidden */
+.trio {
+  transition: opacity .25s ease;
+}
+.trio.is-focused {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* focus panel */
+.trio-focus-panel {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 1rem 0 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  align-self: start;
+}
+.trio-focus-panel.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+@keyframes focusFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.trio-focus-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .8rem;
+}
+.trio-focus-icon svg {
+  width: 100%; max-width: 140px; height: auto; overflow: visible;
+}
+.trio-focus-letter {
+  font-family: var(--serif); font-weight: 900;
+  font-size: clamp(36px, 5vw, 54px);
+  line-height: 1; letter-spacing: -.03em;
+}
+.trio-focus-word {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  font-weight: 500; color: var(--faint); margin-top: -.1rem;
+}
+.trio-focus-desc {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.72;
+  color: var(--muted);
+}
+.trio-focus-desc strong {
+  font-weight: 600; color: var(--ink);
+}
+
 /* ── ARTICLE COLUMN ── */
 .col {
   max-width: 680px; margin: 0 auto; padding: 0 1.5rem;
@@ -170,10 +297,10 @@ body::before {
 }
 .trio-illo svg { width: 100%; height: 100%; overflow: visible; }
 
-/* ESG labels — hidden until revealed */
+/* ESG labels — visible by default */
 .trio-label {
   text-align: center;
-  opacity: 0; transform: translateY(6px);
+  opacity: 1; transform: none;
   transition: opacity .6s ease, transform .6s ease;
 }
 .trio-label.shown { opacity: 1; transform: none; }
@@ -271,6 +398,74 @@ body::before {
   border-radius: 2px;
 }
 .ai-card-esg::before { content: '→'; color: var(--faint); }
+
+/* ── AI CARD ANIMATIONS ── */
+.ai-anim {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background: var(--paper2);
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+}
+.ai-anim-label {
+  font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+  font-weight: 600; color: var(--faint); margin-bottom: .9rem;
+}
+.ai-anim-note {
+  font-size: 11px; color: var(--faint); margin-top: .8rem; font-style: italic;
+}
+.ai-anim-replay {
+  margin-top: .8rem; background: none; border: 1px solid var(--rule);
+  font-size: 11px; color: var(--muted); padding: .3rem .8rem;
+  cursor: pointer; border-radius: 2px; font-family: var(--sans);
+  transition: border-color .2s, color .2s;
+}
+.ai-anim-replay:hover { border-color: var(--ink); color: var(--ink); }
+
+/* Predictive */
+.pred-layout { display: grid; grid-template-columns: 1fr 100px; gap: 1rem; align-items: center; }
+.pred-factors { display: flex; flex-direction: column; gap: .55rem; }
+.pred-factor { display: grid; grid-template-columns: 80px 1fr 52px; gap: .5rem; align-items: center; }
+.pred-factor-name { font-size: 11px; color: var(--muted); }
+.pred-factor-bar-wrap { height: 6px; background: rgba(0,0,0,.07); border-radius: 3px; overflow: hidden; }
+.pred-factor-bar { height: 100%; width: 0%; background: var(--g); border-radius: 3px; transition: width .6s ease; }
+.pred-factor-val { font-size: 10px; color: var(--faint); text-align: right; font-variant-numeric: tabular-nums; }
+.pred-score-wrap { text-align: center; }
+.pred-score-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-bottom: .3rem; }
+.pred-score-num { font-family: var(--serif); font-weight: 900; font-size: 2.4rem; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pred-score-verdict { font-size: 10px; margin-top: .3rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Generative */
+.gen-layout { display: grid; grid-template-columns: 1fr 110px; gap: 1rem; align-items: start; }
+.gen-text-wrap { font-size: 13px; line-height: 1.65; color: var(--ink); min-height: 80px; }
+.gen-cursor { display: inline-block; opacity: 1; animation: blink .7s infinite; color: var(--s); font-weight: 300; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.gen-meter-wrap { text-align: center; }
+.gen-meter-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-bottom: .4rem; }
+.gen-meter-bar-wrap { height: 80px; width: 24px; background: rgba(0,0,0,.07); border-radius: 3px; overflow: hidden; display: flex; align-items: flex-end; margin: 0 auto .4rem; }
+.gen-meter-bar { width: 100%; height: 0%; background: var(--s); transition: height .3s ease; border-radius: 3px; }
+.gen-meter-val { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.gen-meter-compare { font-size: 9.5px; color: var(--faint); margin-top: .3rem; line-height: 1.4; }
+
+/* Agentic */
+.agent-chain { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin: .5rem 0; }
+.agent-step { display: flex; flex-direction: column; align-items: center; gap: .25rem; opacity: .25; transition: opacity .4s ease; min-width: 64px; }
+.agent-step.active { opacity: 1; }
+.agent-step.done { opacity: .7; }
+.agent-step-icon { font-size: 1.4rem; }
+.agent-step-label { font-size: 10px; color: var(--ink); font-weight: 500; text-align: center; line-height: 1.3; }
+.agent-step-status { font-size: 9px; color: var(--faint); height: 12px; }
+.agent-arrow { color: var(--faint); font-size: 1rem; opacity: .3; transition: opacity .4s ease; flex-shrink: 0; }
+.agent-arrow.active { opacity: 1; color: var(--e); }
+.agent-approval-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: .6rem; padding: .4rem .6rem;
+  background: rgba(194,64,42,.06); border: 1px solid rgba(194,64,42,.15);
+  border-radius: 3px;
+}
+.agent-approval-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.agent-approval-count { font-size: 12px; font-weight: 700; color: var(--faint); font-variant-numeric: tabular-nums; transition: color .3s; }
+.agent-note { font-size: 12px; color: var(--muted); margin-top: .6rem; min-height: 1.4em; font-style: italic; }
 
 /* ── HAND ANNOTATION ── */
 .hand-note {
@@ -1432,6 +1627,11 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 <div class="cover">
   <div class="cover-glow"></div>
   <h1 class="cover-h">When AI meets<br>sustainability.</h1>
+  <div class="cover-counter-wrap">
+    <div class="cover-counter-label">Since you opened this page, AI data centers have consumed</div>
+    <div class="cover-counter-num"><span id="cover-kwh">0</span> <span class="cover-counter-unit">kWh</span></div>
+    <div class="cover-counter-sub">Based on IEA 2025 estimate: ~945 TWh/year by 2030 &nbsp;·&nbsp; ~30 MWh per second globally</div>
+  </div>
 </div>
 
 <!-- TRIO SECTION -->
@@ -1444,7 +1644,8 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
   </p>
 
   <!-- Three illustrations -->
-  <div class="trio">
+  <div class="trio-wrap" id="trio-wrap">
+    <div class="trio">
 
     <!-- E: Tree -->
     <div class="trio-item" id="trio-e">
@@ -1549,18 +1750,26 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 
   </div><!-- /trio -->
 
-  <!-- Scroll cue to reveal labels -->
-  <div class="reveal-trigger">
-    <button class="reveal-btn" id="reveal-btn" onclick="revealESG()">What are these? →</button>
+  <!-- Focus state: icon left, description right -->
+  <div class="trio-focus-panel" id="trio-focus-panel">
+    <div class="trio-focus-icon" id="trio-focus-icon"></div>
+    <div class="trio-focus-desc" id="trio-focus-desc"></div>
   </div>
 
+  <!-- Hint sits below both stacked states -->
+  <div class="reveal-trigger" id="reveal-trigger-wrap" style="grid-row:2;grid-column:1">
+    <p class="reveal-hint">Hover over each icon to reveal what's broken.</p>
+  </div>
+
+  </div><!-- /trio-wrap -->
+
   <!-- Post-reveal prose -->
-  <div class="appear" id="post-reveal" style="opacity:0;pointer-events:none;transition:opacity .8s ease">
+  <div id="post-reveal" style="opacity:0;pointer-events:none;transition:opacity .8s ease;max-height:0;overflow:hidden;transition:opacity .8s ease, max-height .8s ease">
     <p style="font-size:17px;line-height:1.82;color:#333;font-weight:300">
-      <strong style="font-weight:600;color:var(--ink)">E, S, and G.</strong> For two decades, this three-part framework has been how investors, regulators, and the public ask a simple question: <em>is this company doing right by the world?</em> The answers become scores. The scores shape capital flows worth trillions of dollars.
+      <strong style="font-weight:600;color:var(--ink)">E, S, and G.</strong> For two decades, this three-part framework has been how investors, regulators, and the public ask a simple question: <em>is this company doing right by the world?</em> The answers become scores that shape capital flows worth trillions of dollars.
     </p>
     <p style="font-size:17px;line-height:1.82;color:#333;font-weight:300;margin-top:1.2rem">
-      The framework was designed around annual disclosures, human decision-makers, and a relatively stable set of risks. It wasn&rsquo;t built to account for AI systems that make millions of automated decisions, consume industrial quantities of energy and water, and reshape labor markets faster than reporting cycles can track.
+      The framework was designed around annual disclosures, human decision-makers, and a relatively stable set of risks. It wasn&rsquo;t built for AI systems that make millions of automated decisions, consume extraordinary energy and water, and reshape labor markets at a speed reporting cycles can&rsquo;t track.
     </p>
     <p style="font-size:17px;line-height:1.82;color:#333;font-weight:300;margin-top:1.2rem">
       <strong style="font-weight:600;color:var(--ink)">AI isn&rsquo;t one thing</strong> — it&rsquo;s at least three, each with different implications for how ESG frameworks need to evolve.
@@ -1577,6 +1786,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 
   <div class="ai-cards">
 
+    <!-- TYPE 01: Predictive AI -->
     <div class="ai-card appear">
       <div class="ai-card-accent"><div class="ai-card-accent-bar"></div></div>
       <div class="ai-card-body">
@@ -1584,9 +1794,45 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
         <div class="ai-card-name">Predictive AI</div>
         <p class="ai-card-fn">Learns from historical data to forecast, score, and classify. The oldest type — it's been running credit models and risk assessments for 20 years. It already powers most ESG ratings you've ever seen.</p>
         <div class="ai-card-esg">Already embedded in ESG scoring</div>
+
+        <!-- SCORE ANIMATION -->
+        <div class="ai-anim" id="anim-predictive">
+          <div class="ai-anim-label">Credit risk scoring — live model</div>
+          <div class="pred-layout">
+            <div class="pred-factors">
+              <div class="pred-factor" id="pf-credit">
+                <div class="pred-factor-name">Credit history</div>
+                <div class="pred-factor-bar-wrap"><div class="pred-factor-bar" id="pfb-credit"></div></div>
+                <div class="pred-factor-val" id="pfv-credit">—</div>
+              </div>
+              <div class="pred-factor" id="pf-employ">
+                <div class="pred-factor-name">Employment</div>
+                <div class="pred-factor-bar-wrap"><div class="pred-factor-bar" id="pfb-employ"></div></div>
+                <div class="pred-factor-val" id="pfv-employ">—</div>
+              </div>
+              <div class="pred-factor" id="pf-location">
+                <div class="pred-factor-name">Location</div>
+                <div class="pred-factor-bar-wrap"><div class="pred-factor-bar" id="pfb-location"></div></div>
+                <div class="pred-factor-val" id="pfv-location">—</div>
+              </div>
+              <div class="pred-factor" id="pf-age">
+                <div class="pred-factor-name">Account age</div>
+                <div class="pred-factor-bar-wrap"><div class="pred-factor-bar" id="pfb-age"></div></div>
+                <div class="pred-factor-val" id="pfv-age">—</div>
+              </div>
+            </div>
+            <div class="pred-score-wrap">
+              <div class="pred-score-label">Risk score</div>
+              <div class="pred-score-num" id="pred-score">—</div>
+              <div class="pred-score-verdict" id="pred-verdict"></div>
+            </div>
+          </div>
+          <div class="ai-anim-note">Model recalculates automatically. No human in the loop.</div>
+        </div>
       </div>
     </div>
 
+    <!-- TYPE 02: Generative AI -->
     <div class="ai-card appear">
       <div class="ai-card-accent"><div class="ai-card-accent-bar"></div></div>
       <div class="ai-card-body">
@@ -1594,9 +1840,28 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
         <div class="ai-card-name">Generative AI</div>
         <p class="ai-card-fn">Produces content: text, code, images, analysis. The kind behind ChatGPT, Copilot, and Gemini. The one your team is already using. Also the one that consumes extraordinary energy and water to run at scale.</p>
         <div class="ai-card-esg">Changed the game in 2022</div>
+
+        <!-- TOKEN STREAM ANIMATION -->
+        <div class="ai-anim" id="anim-generative">
+          <div class="ai-anim-label">Generating ESG disclosure draft…</div>
+          <div class="gen-layout">
+            <div class="gen-text-wrap">
+              <div class="gen-text" id="gen-text"></div>
+              <span class="gen-cursor" id="gen-cursor">|</span>
+            </div>
+            <div class="gen-meter-wrap">
+              <div class="gen-meter-label">Energy used</div>
+              <div class="gen-meter-bar-wrap"><div class="gen-meter-bar" id="gen-meter-bar"></div></div>
+              <div class="gen-meter-val"><span id="gen-wh">0.00</span> Wh</div>
+              <div class="gen-meter-compare" id="gen-compare"></div>
+            </div>
+          </div>
+          <button class="ai-anim-replay" id="gen-replay" onclick="startGenAnim()">↺ Replay</button>
+        </div>
       </div>
     </div>
 
+    <!-- TYPE 03: Agentic AI -->
     <div class="ai-card appear">
       <div class="ai-card-accent"><div class="ai-card-accent-bar"></div></div>
       <div class="ai-card-body">
@@ -1604,6 +1869,42 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
         <div class="ai-card-name">Agentic AI</div>
         <p class="ai-card-fn">Systems that don't just respond — they act. Make decisions. Execute tasks. Adapt without waiting for a human to press go. The newest arrival, and the one where the accountability questions haven't been answered yet.</p>
         <div class="ai-card-esg">The frontier, right now</div>
+
+        <!-- AGENT ACTION CHAIN -->
+        <div class="ai-anim" id="anim-agentic">
+          <div class="ai-anim-label">Agent executing autonomously</div>
+          <div class="agent-chain" id="agent-chain">
+            <div class="agent-step" id="as-0">
+              <div class="agent-step-icon">📧</div>
+              <div class="agent-step-label">Scan emails</div>
+              <div class="agent-step-status" id="ass-0"></div>
+            </div>
+            <div class="agent-arrow" id="aa-0">→</div>
+            <div class="agent-step" id="as-1">
+              <div class="agent-step-icon">📝</div>
+              <div class="agent-step-label">Draft board memo</div>
+              <div class="agent-step-status" id="ass-1"></div>
+            </div>
+            <div class="agent-arrow" id="aa-1">→</div>
+            <div class="agent-step" id="as-2">
+              <div class="agent-step-icon">💸</div>
+              <div class="agent-step-label">Approve $2.3M payment</div>
+              <div class="agent-step-status" id="ass-2"></div>
+            </div>
+            <div class="agent-arrow" id="aa-2">→</div>
+            <div class="agent-step" id="as-3">
+              <div class="agent-step-icon">🏛</div>
+              <div class="agent-step-label">File SEC disclosure</div>
+              <div class="agent-step-status" id="ass-3"></div>
+            </div>
+          </div>
+          <div class="agent-approval-row">
+            <span class="agent-approval-label">Human approvals</span>
+            <span class="agent-approval-count" id="agent-approval-count">0 / 0 steps</span>
+          </div>
+          <div class="agent-note" id="agent-note"></div>
+          <button class="ai-anim-replay" id="agent-replay" onclick="startAgentAnim()">↺ Replay</button>
+        </div>
       </div>
     </div>
 
@@ -2554,27 +2855,264 @@ const trioObs = new IntersectionObserver(entries => {
 }, { threshold: 0.25 });
 document.querySelectorAll('.trio-item').forEach(el => trioObs.observe(el));
 
-// REVEAL ESG labels
-function revealESG() {
-  document.getElementById('label-e').classList.add('shown');
-  setTimeout(() => document.getElementById('label-s').classList.add('shown'), 200);
-  setTimeout(() => document.getElementById('label-g').classList.add('shown'), 400);
-  setTimeout(() => {
-    document.getElementById('reveal-btn').classList.add('done');
-    const post = document.getElementById('post-reveal');
-    post.style.opacity = '1';
-    post.style.pointerEvents = 'auto';
-  }, 700);
+// COVER COUNTER — AI data center energy
+(function() {
+  const el = document.getElementById('cover-kwh');
+  if (!el) return;
+  const KWH_PER_SECOND = 30000; // ~945 TWh/year real rate
+  const start = performance.now();
+  let lastUpdate = -1;
+  function tick(now) {
+    if (now - lastUpdate >= 150) {
+      lastUpdate = now;
+      const elapsed = (now - start) / 1000;
+      el.textContent = Math.floor(elapsed * KWH_PER_SECOND).toLocaleString();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// PER-ICON HOVER — focus mode: icon left, description right
+(function() {
+  const wrap = document.getElementById('trio-wrap');
+  const trio = wrap ? wrap.querySelector('.trio') : null;
+  const panel = document.getElementById('trio-focus-panel');
+  const iconSlot = document.getElementById('trio-focus-icon');
+  const descSlot = document.getElementById('trio-focus-desc');
+  const hintEl = document.querySelector('.reveal-hint');
+  if (!wrap || !trio || !panel) return;
+
+  let allSeen = { e: false, s: false, g: false };
+
+  const data = {
+    e: {
+      color: 'var(--e)', letter: 'E', word: 'Environmental',
+      desc: 'ESG frameworks were built to track pollution and carbon footprints. Then AI arrived — and started consuming electricity at industrial scale. The framework wasn\'t designed for a technology that treats energy as a raw material.',
+    },
+    s: {
+      color: 'var(--s)', letter: 'S', word: 'Social',
+      desc: 'The "social" in ESG asks whether companies treat people fairly. But AI is now making decisions about who gets hired, who gets a loan, who gets flagged as a fraud risk. Most of that is invisible in any ESG report.',
+    },
+    g: {
+      color: 'var(--g)', letter: 'G', word: 'Governance',
+      desc: 'Governance is about accountability — who\'s in charge, who checks the work, who gets blamed when something goes wrong. AI makes all three of those questions genuinely hard to answer.',
+    },
+  };
+
+  function getSVG(key) {
+    const ids = { e: 'trio-e', s: 'trio-s', g: 'trio-g' };
+    const el = document.getElementById(ids[key]);
+    if (!el) return '';
+    const svg = el.querySelector('svg');
+    return svg ? svg.outerHTML : '';
+  }
+
+  let hoverTimer = null;
+
+  function activate(key) {
+    allSeen[key] = true;
+    const d = data[key];
+    iconSlot.innerHTML = `${getSVG(key)}<div class="trio-focus-letter" style="color:${d.color}">${d.letter}</div><div class="trio-focus-word">${d.word}</div>`;
+    descSlot.innerHTML = `<p>${d.desc}</p>`;
+    trio.classList.add('is-focused');
+    panel.classList.add('active');
+    if (hintEl) hintEl.style.opacity = '0';
+    if (allSeen.e && allSeen.s && allSeen.g) {
+      const post = document.getElementById('post-reveal');
+      if (post) { post.style.opacity='1'; post.style.pointerEvents='auto'; post.style.maxHeight='1000px'; }
+    }
+  }
+
+  function deactivate() {
+    clearTimeout(hoverTimer);
+    trio.classList.remove('is-focused');
+    panel.classList.remove('active');
+    if (hintEl) hintEl.style.opacity = '1';
+  }
+
+  ['e','s','g'].forEach(key => {
+    const el = document.getElementById('trio-' + key);
+    if (!el) return;
+    el.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => activate(key), 320);
+    });
+    el.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
+  });
+
+  // only deactivate when leaving the whole wrap
+  wrap.addEventListener('mouseleave', deactivate);
+})();
+
+// Legacy no-op
+function revealESG() {}
+// ══ AI CARD ANIMATIONS ══════════════════════
+
+// ── PREDICTIVE: cycling score scenarios ──
+(function() {
+  const scenarios = [
+    { credit: 82, employ: 90, location: 45, age: 70 },
+    { credit: 30, employ: 55, location: 20, age: 25 },
+    { credit: 65, employ: 40, location: 80, age: 55 },
+    { credit: 50, employ: 75, location: 35, age: 90 },
+  ];
+  let idx = 0;
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function calcScore(s) { return Math.round((s.credit * .35 + s.employ * .25 + s.location * .2 + s.age * .2) * 8.5 + 300); }
+  function setScenario(s) {
+    const fields = ['credit','employ','location','age'];
+    const labels = ['Good','Good','Average','New'];
+    const labelsLow = ['Poor','Unstable','High-risk','No history'];
+    fields.forEach((f, i) => {
+      const bar = document.getElementById('pfb-' + f);
+      const val = document.getElementById('pfv-' + f);
+      if (bar) bar.style.width = s[f] + '%';
+      if (val) val.textContent = s[f] > 55 ? labels[i] : labelsLow[i];
+    });
+    const score = calcScore(s);
+    const el = document.getElementById('pred-score');
+    const verdict = document.getElementById('pred-verdict');
+    if (el) el.textContent = score;
+    if (verdict) {
+      if (score >= 700) { verdict.textContent = 'Low risk'; verdict.style.color = '#0f6b44'; }
+      else if (score >= 580) { verdict.textContent = 'Medium risk'; verdict.style.color = '#b45309'; }
+      else { verdict.textContent = 'High risk'; verdict.style.color = '#c2402a'; }
+    }
+  }
+  function cycle() {
+    idx = (idx + 1) % scenarios.length;
+    setScenario(scenarios[idx]);
+  }
+  // Start when scrolled into view
+  const trigger = document.getElementById('anim-predictive');
+  if (trigger) {
+    const o = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        setScenario(scenarios[0]);
+        setInterval(cycle, 2200);
+        o.disconnect();
+      }
+    }, { threshold: 0.4 });
+    o.observe(trigger);
+  }
+})();
+
+// ── GENERATIVE: typewriter + energy meter ──
+const GEN_TEXT = `"Our AI systems are deployed responsibly, with robust oversight frameworks in place to ensure alignment with our sustainability commitments and stakeholder values."`;
+let genTimer = null;
+
+function startGenAnim() {
+  const textEl = document.getElementById('gen-text');
+  const meterBar = document.getElementById('gen-meter-bar');
+  const whEl = document.getElementById('gen-wh');
+  const compare = document.getElementById('gen-compare');
+  const replay = document.getElementById('gen-replay');
+  if (!textEl) return;
+  if (genTimer) clearInterval(genTimer);
+  textEl.textContent = '';
+  if (meterBar) meterBar.style.height = '0%';
+  if (whEl) whEl.textContent = '0.00';
+  if (compare) compare.textContent = '';
+  if (replay) replay.style.display = 'none';
+  let i = 0;
+  const totalWh = 0.34;
+  genTimer = setInterval(() => {
+    if (i >= GEN_TEXT.length) {
+      clearInterval(genTimer);
+      if (replay) replay.style.display = 'inline-block';
+      if (compare) compare.textContent = '11× a Google search';
+      return;
+    }
+    i += Math.floor(Math.random() * 3) + 1;
+    i = Math.min(i, GEN_TEXT.length);
+    textEl.textContent = GEN_TEXT.slice(0, i);
+    const pct = i / GEN_TEXT.length;
+    if (whEl) whEl.textContent = (pct * totalWh).toFixed(3);
+    if (meterBar) meterBar.style.height = (pct * 100) + '%';
+  }, 55);
 }
 
-// Also auto-reveal when scrolled to on mobile
-const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && e.intersectionRatio > 0.6) revealESG();
+(function() {
+  const trigger = document.getElementById('anim-generative');
+  if (trigger) {
+    const o = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { startGenAnim(); o.disconnect(); }
+    }, { threshold: 0.4 });
+    o.observe(trigger);
+  }
+})();
+
+// ── AGENTIC: action chain ──
+const AGENT_STEPS = [
+  { id: 'as-0', arrow: 'aa-0', status: 'Scanning…', done: 'Done ✓' },
+  { id: 'as-1', arrow: 'aa-1', status: 'Drafting…', done: 'Done ✓' },
+  { id: 'as-2', arrow: 'aa-2', status: 'Processing…', done: 'Done ✓' },
+  { id: 'as-3', arrow: null,   status: 'Filing…',    done: 'Submitted ✓' },
+];
+const AGENT_NOTES = [
+  '847 emails scanned. 3 flagged as urgent. No human read them.',
+  'Memo drafted using last quarter\'s data. Unverified. Sent for review.',
+  'Vendor contract matched. $2.3M payment approved. No sign-off requested.',
+  'Disclosure filed to SEC portal. No legal review. No human approved this.',
+];
+let agentTimer = null;
+
+function startAgentAnim() {
+  const replay = document.getElementById('agent-replay');
+  const noteEl = document.getElementById('agent-note');
+  const approvalEl = document.getElementById('agent-approval-count');
+  if (replay) replay.style.display = 'none';
+  if (noteEl) noteEl.textContent = '';
+  if (approvalEl) { approvalEl.textContent = '0 / 0 steps'; approvalEl.style.color = 'var(--faint)'; }
+  AGENT_STEPS.forEach(s => {
+    const el = document.getElementById(s.id);
+    const st = document.getElementById('ass-' + s.id.split('-')[1]);
+    if (el) { el.classList.remove('active','done'); }
+    if (st) st.textContent = '';
+    if (s.arrow) { const a = document.getElementById(s.arrow); if (a) a.classList.remove('active'); }
   });
-}, { threshold: 0.6 });
-const btn = document.getElementById('reveal-btn');
-if (btn) revealObs.observe(btn.closest('.reveal-trigger'));
+  if (agentTimer) clearTimeout(agentTimer);
+  let delay = 0;
+  AGENT_STEPS.forEach((s, i) => {
+    const stepNum = s.id.split('-')[1];
+    agentTimer = setTimeout(() => {
+      const el = document.getElementById(s.id);
+      const st = document.getElementById('ass-' + stepNum);
+      if (el) el.classList.add('active');
+      if (st) st.textContent = s.status;
+      if (noteEl) noteEl.textContent = AGENT_NOTES[i];
+      if (approvalEl) { approvalEl.textContent = `0 / ${i + 1} steps`; approvalEl.style.color = '#c2402a'; }
+      if (i > 0) {
+        const prev = AGENT_STEPS[i-1];
+        const prevEl = document.getElementById(prev.id);
+        const prevSt = document.getElementById('ass-' + prev.id.split('-')[1]);
+        if (prevEl) { prevEl.classList.remove('active'); prevEl.classList.add('done'); }
+        if (prevSt) prevSt.textContent = prev.done;
+        if (prev.arrow) { const a = document.getElementById(prev.arrow); if (a) a.classList.add('active'); }
+      }
+      if (i === AGENT_STEPS.length - 1) {
+        setTimeout(() => {
+          if (el) { el.classList.remove('active'); el.classList.add('done'); }
+          if (st) st.textContent = s.done;
+          if (approvalEl) approvalEl.textContent = `0 / ${AGENT_STEPS.length} steps`;
+          if (replay) replay.style.display = 'inline-block';
+        }, 900);
+      }
+    }, delay);
+    delay += 1600;
+  });
+}
+
+(function() {
+  const trigger = document.getElementById('anim-agentic');
+  if (trigger) {
+    const o = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { startAgentAnim(); o.disconnect(); }
+    }, { threshold: 0.4 });
+    o.observe(trigger);
+  }
+})();
 
 // ══ E SECTION ══════════════════════════════
 // ── APPEAR ──────────────────────────────────────────
@@ -2601,38 +3139,50 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
   function logPct(wh) { return (Math.log10(wh) - logMin) / logRange; }
 
   const data = [
-    { name:'Google search',      sub:'the baseline',       wh:0.03,  color:'#999',    mult:null },
-    { name:'GenAI text prompt',  sub:'ChatGPT, Gemini',    wh:0.34,  color:'#0f6b44', mult:'11×' },
-    { name:'GenAI image',        sub:'Midjourney, DALL·E', wh:4,     color:'#c06b20', mult:'130×' },
-    { name:'Agentic / reasoning',sub:'o3, deep research',  wh:40,    color:'#b83c2b', mult:'1,300×' },
+    { name:'Google search',      sub:'the baseline',       wh:0.03,  color:'#999',    mult:null,       compare:'About the same as blinking twice' },
+    { name:'GenAI text prompt',  sub:'ChatGPT, Gemini',    wh:0.34,  color:'#0f6b44', mult:'11×',      compare:'Charging your phone by about 1%' },
+    { name:'GenAI image',        sub:'Midjourney, DALL·E', wh:4,     color:'#c06b20', mult:'130×',     compare:'Leaving a 40W bulb on for 6 seconds' },
+    { name:'Agentic / reasoning',sub:'o3, deep research',  wh:40,    color:'#b83c2b', mult:'1,300×',   compare:'Driving a petrol car ~250 metres' },
   ];
 
-  const LABEL_W = 148; // row label column width
-  const MULT_W  = 52;  // multiplier column width
-  const ROW_H   = 52;  // height per data row
-  const TICK_H  = 36;  // height of the tick/axis area at top
+  // Sequential timing: each row starts after previous fully completes
+  const SEQ_DELAY   = [0, 900, 1800, 2750]; // ms delay before each row starts
+  const BAR_DUR     = [0.55, 0.6, 0.65, 0.8]; // bar draw duration (s)
+
+  const LABEL_W = 148;
+  const MULT_W  = 52;
+  const ROW_H   = 58;
+  const TICK_H  = 36;
   const PAD_L   = 8;
   const PAD_R   = 8;
   const DOT_R   = 5;
+  const COMPARE_H = 14; // extra height per row for comparison text
+
+  // Hover state
+  let hoveredRow = null;
+  const rowEls = [];   // per-row element groups for dimming
+  const compareEls = []; // per-row comparison text
 
   function render() {
     svg.innerHTML = '';
+    rowEls.length = 0;
+    compareEls.length = 0;
+
     const W = svg.getBoundingClientRect().width || 600;
     const chartL = LABEL_W + PAD_L;
     const chartR = W - MULT_W - PAD_R;
     const chartW = chartR - chartL;
-    const totalH = TICK_H + data.length * ROW_H + 12;
+    const totalH = TICK_H + data.length * (ROW_H + COMPARE_H) + 16;
     svg.setAttribute('height', totalH);
     svg.setAttribute('viewBox', `0 0 ${W} ${totalH}`);
 
     function xPos(wh) { return chartL + logPct(wh) * chartW; }
 
-    // ── TICK MARKS & AXIS LINE ──────────────────────
+    // ── AXIS ──────────────────────────────────────
     const ticks = [0.01, 0.1, 1, 10, 100];
     const tickLabels = ['0.01 Wh', '0.1 Wh', '1 Wh', '10 Wh', '100 Wh'];
     const axisY = TICK_H - 4;
 
-    // axis note — TOP, before anything else
     const note = document.createElementNS(NS, 'text');
     note.setAttribute('x', chartL); note.setAttribute('y', 9);
     note.setAttribute('font-family', 'Caveat,cursive'); note.setAttribute('font-size', '13');
@@ -2640,7 +3190,6 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
     note.textContent = '← each step = 10× more energy';
     svg.appendChild(note);
 
-    // tick labels — row 2
     ticks.forEach((v, i) => {
       const x = xPos(v);
       const tl = document.createElementNS(NS, 'text');
@@ -2653,14 +3202,13 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       svg.appendChild(tl);
     });
 
-    // axis line — row 3
     const axisLine = document.createElementNS(NS, 'line');
     axisLine.setAttribute('x1', chartL); axisLine.setAttribute('x2', chartR);
     axisLine.setAttribute('y1', axisY); axisLine.setAttribute('y2', axisY);
     axisLine.setAttribute('stroke', '#ddd'); axisLine.setAttribute('stroke-width', '1');
     svg.appendChild(axisLine);
 
-    ticks.forEach((v, i) => {
+    ticks.forEach(v => {
       const x = xPos(v);
       const tm = document.createElementNS(NS, 'line');
       tm.setAttribute('x1', x); tm.setAttribute('x2', x);
@@ -2669,13 +3217,22 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       svg.appendChild(tm);
     });
 
-    // ── DATA ROWS ───────────────────────────────────
+    // ── DATA ROWS ──────────────────────────────────
     data.forEach((d, i) => {
-      const rowY = TICK_H + 24 + i * ROW_H;
+      const rowY = TICK_H + 24 + i * (ROW_H + COMPARE_H);
       const dotX = xPos(d.wh);
       const barColor = d.color;
+      const delay = SEQ_DELAY[i];
+      const dur = BAR_DUR[i];
 
-      // Row name (right-aligned, in label column)
+      // Group for dimming
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', 'lollipop-row');
+      g.style.transition = 'opacity .25s ease';
+      svg.appendChild(g);
+      rowEls.push(g);
+
+      // Row name
       const nameEl = document.createElementNS(NS, 'text');
       nameEl.setAttribute('x', LABEL_W - 10); nameEl.setAttribute('y', rowY + 4);
       nameEl.setAttribute('text-anchor', 'end');
@@ -2684,7 +3241,7 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       nameEl.setAttribute('font-weight', '500');
       nameEl.setAttribute('fill', '#222');
       nameEl.textContent = d.name;
-      svg.appendChild(nameEl);
+      g.appendChild(nameEl);
 
       const subEl = document.createElementNS(NS, 'text');
       subEl.setAttribute('x', LABEL_W - 10); subEl.setAttribute('y', rowY + 17);
@@ -2693,41 +3250,41 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       subEl.setAttribute('font-size', '10.5');
       subEl.setAttribute('fill', '#999');
       subEl.textContent = d.sub;
-      svg.appendChild(subEl);
+      g.appendChild(subEl);
 
-      // Vertical grid line at dot position (subtle)
+      // Vertical grid line
       const vg = document.createElementNS(NS, 'line');
       vg.setAttribute('x1', dotX); vg.setAttribute('x2', dotX);
       vg.setAttribute('y1', axisY); vg.setAttribute('y2', rowY + 4);
       vg.setAttribute('stroke', barColor); vg.setAttribute('stroke-width', '0.5');
       vg.setAttribute('stroke-dasharray', '2,3'); vg.setAttribute('opacity', '0.35');
-      svg.appendChild(vg);
+      g.appendChild(vg);
 
-      // Bar (from chartL to dotX)
+      // Bar — starts at 0, animates to dotX
       const bar = document.createElementNS(NS, 'line');
-      bar.setAttribute('x1', chartL); bar.setAttribute('x2', chartL); // starts at 0, animates
+      bar.setAttribute('x1', chartL); bar.setAttribute('x2', chartL);
       bar.setAttribute('y1', rowY + 4); bar.setAttribute('y2', rowY + 4);
       bar.setAttribute('stroke', barColor); bar.setAttribute('stroke-width', '3');
-      bar.setAttribute('stroke-linecap', 'round'); bar.setAttribute('opacity', '0.8');
-      bar.style.transition = `x2 ${0.9 + i * 0.15}s cubic-bezier(.25,1,.3,1)`;
-      svg.appendChild(bar);
-      // Animate bar after small delay
-      setTimeout(() => { bar.setAttribute('x2', dotX); }, 100 + i * 120);
+      bar.setAttribute('stroke-linecap', 'round'); bar.setAttribute('opacity', '0.85');
+      bar.style.transition = `x2 ${dur}s cubic-bezier(.25,1,.3,1)`;
+      g.appendChild(bar);
+      setTimeout(() => { bar.setAttribute('x2', dotX); }, delay + 80);
 
-      // Dot at end of bar
+      // Dot
       const dot = document.createElementNS(NS, 'circle');
       dot.setAttribute('cx', dotX); dot.setAttribute('cy', rowY + 4);
       dot.setAttribute('r', DOT_R);
       dot.setAttribute('fill', barColor);
       dot.setAttribute('stroke', '#fdfcf8'); dot.setAttribute('stroke-width', '2');
       dot.setAttribute('opacity', '0');
-      dot.style.transition = `opacity .3s ease ${0.9 + i * 0.15}s`;
-      svg.appendChild(dot);
-      setTimeout(() => { dot.setAttribute('opacity', '1'); }, 100 + i * 120);
+      g.appendChild(dot);
+      setTimeout(() => {
+        dot.style.transition = 'opacity .25s ease, r .25s ease';
+        dot.setAttribute('opacity', '1');
+      }, delay + dur * 1000 + 80);
 
-      // Value label — sits ABOVE the dot, never overlaps bar
+      // Value label
       const valEl = document.createElementNS(NS, 'text');
-      // Center on dot, clamp within chart
       const valW = d.wh >= 10 ? 72 : d.wh >= 1 ? 48 : 52;
       const valX = Math.min(Math.max(dotX - valW / 2, chartL), chartR - valW);
       valEl.setAttribute('x', valX); valEl.setAttribute('y', rowY - 6);
@@ -2736,12 +3293,14 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       valEl.setAttribute('font-weight', '700');
       valEl.setAttribute('fill', barColor);
       valEl.setAttribute('opacity', '0');
-      valEl.style.transition = `opacity .4s ease ${1.1 + i * 0.15}s`;
       valEl.textContent = d.wh < 1 ? d.wh + ' Wh' : d.wh < 10 ? '~' + d.wh + ' Wh' : 'up to ' + d.wh + ' Wh';
-      svg.appendChild(valEl);
-      setTimeout(() => { valEl.setAttribute('opacity', '1'); }, 100 + i * 120);
+      g.appendChild(valEl);
+      setTimeout(() => {
+        valEl.style.transition = 'opacity .35s ease';
+        valEl.setAttribute('opacity', '1');
+      }, delay + dur * 1000 + 200);
 
-      // Multiplier (right column)
+      // Multiplier
       if (d.mult) {
         const multEl = document.createElementNS(NS, 'text');
         multEl.setAttribute('x', chartR + 8); multEl.setAttribute('y', rowY + 8);
@@ -2750,15 +3309,59 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
         multEl.setAttribute('font-weight', '600');
         multEl.setAttribute('fill', barColor);
         multEl.setAttribute('opacity', '0');
-        multEl.style.transition = `opacity .4s ease ${1.2 + i * 0.15}s`;
         multEl.textContent = d.mult;
-        svg.appendChild(multEl);
-        setTimeout(() => { multEl.setAttribute('opacity', '1'); }, 100 + i * 120);
+        g.appendChild(multEl);
+        setTimeout(() => {
+          multEl.style.transition = 'opacity .35s ease';
+          multEl.setAttribute('opacity', '1');
+        }, delay + dur * 1000 + 300);
       }
+
+      // Real-world comparison — hidden until hover
+      const cmpEl = document.createElementNS(NS, 'text');
+      cmpEl.setAttribute('x', LABEL_W - 10); cmpEl.setAttribute('y', rowY + 30);
+      cmpEl.setAttribute('text-anchor', 'end');
+      cmpEl.setAttribute('font-family', 'Caveat,cursive');
+      cmpEl.setAttribute('font-size', '14.5');
+      cmpEl.setAttribute('fill', barColor);
+      cmpEl.setAttribute('opacity', '0');
+      cmpEl.style.transition = 'opacity .2s ease';
+      cmpEl.textContent = '≈ ' + d.compare;
+      g.appendChild(cmpEl);
+      compareEls.push(cmpEl);
+
+      // Hover target — transparent rect over whole row
+      const hitRect = document.createElementNS(NS, 'rect');
+      hitRect.setAttribute('x', 0);
+      hitRect.setAttribute('y', rowY - 14);
+      hitRect.setAttribute('width', W);
+      hitRect.setAttribute('height', ROW_H + COMPARE_H);
+      hitRect.setAttribute('fill', 'transparent');
+      hitRect.setAttribute('cursor', 'pointer');
+      svg.appendChild(hitRect); // above groups
+
+      hitRect.addEventListener('mouseenter', () => {
+        hoveredRow = i;
+        rowEls.forEach((el, j) => {
+          el.style.opacity = j === i ? '1' : '0.18';
+        });
+        // Scale dot up
+        dot.setAttribute('r', DOT_R + 2);
+        // Show comparison
+        compareEls.forEach((el, j) => {
+          el.setAttribute('opacity', j === i ? '1' : '0');
+        });
+      });
+
+      hitRect.addEventListener('mouseleave', () => {
+        hoveredRow = null;
+        rowEls.forEach(el => { el.style.opacity = '1'; });
+        dot.setAttribute('r', DOT_R);
+        compareEls.forEach(el => { el.setAttribute('opacity', '0'); });
+      });
     });
   }
 
-  // Re-render on resize
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -2806,21 +3409,21 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
   // Grid lines — stage 1
   [200,500,800].forEach(v=>{
     const y=ys(v);
-    svgEl('line',{x1:ml,x2:W-mr,y1:y,y2:y,stroke:'#eaeae8','stroke-width':1},1);
-    txt(v,{x:ml-6,y:y+4,'text-anchor':'end','font-family':'DM Sans,sans-serif','font-size':10,fill:'#ccc'},1);
+    svgEl('line',{x1:ml,x2:W-mr,y1:y,y2:y,stroke:'#e8e5de','stroke-width':1},1);
+    txt(v,{x:ml-6,y:y+4,'text-anchor':'end','font-family':'DM Sans,sans-serif','font-size':10,fill:'#bbb8b2'},1);
   });
   // X-axis ticks: 2010, 2015, 2020, 2025, 2030 (indices 0, 5, 10, 15, 20)
   [0,5,10,15,20].forEach(i=>{
-    txt(yrs[i],{x:xs(i),y:H-7,'text-anchor':'middle','font-family':'DM Sans,sans-serif','font-size':10,fill:'#bbb'},1);
+    txt(yrs[i],{x:xs(i),y:H-7,'text-anchor':'middle','font-family':'DM Sans,sans-serif','font-size':10,fill:'#b5b2ab'},1);
   });
 
   // Pre-2017 flat line — stage 1 (gray dashed, already drawn to show decade of flat demand)
   let flatD=`M${xs(0)},${ys(vs[0])}`;
   for(let i=1;i<=7;i++) flatD+=` L${xs(i)},${ys(vs[i])}`;
-  svgEl('path',{d:flatD,fill:'none',stroke:'#8da0b8','stroke-width':2.2,'stroke-linecap':'round'},1);
+  svgEl('path',{d:flatD,fill:'none',stroke:'#9baf9b','stroke-width':2.2,'stroke-linecap':'round'},1);
 
   // "flat ~10 years" handwritten annotation — stage 1
-  txt('flat for ~10 years',{x:xs(3.5),y:ys(194)-12,'text-anchor':'middle','font-family':'Caveat,cursive','font-size':13,fill:'#8da0b8'},1);
+  txt('flat for ~10 years',{x:xs(3.5),y:ys(194)-12,'text-anchor':'middle','font-family':'Caveat,cursive','font-size':13,fill:'#9baf9b'},1);
 
   // 2017 dot — stage 1
   svgEl('circle',{cx:xs(7),cy:ys(200),r:5,fill:'#0f6b44'},1);
@@ -2846,30 +3449,28 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
   // Line 2022→2024 — stage 3
   let h2=`M${xs(12)},${ys(vs[12])}`;
   for(let i=13;i<=14;i++) h2+=` L${xs(i)},${ys(vs[i])}`;
-  const line2=svgEl('path',{d:h2,fill:'none',stroke:'#0f6b44','stroke-width':2.8,'stroke-linecap':'round',id:'sline2'},3);
+  const line2=svgEl('path',{d:h2,fill:'none',stroke:'#c06b20','stroke-width':2.8,'stroke-linecap':'round',id:'sline2'},3);
   setTimeout(()=>{
     try{const len=line2.getTotalLength();line2.style.strokeDasharray=len;line2.style.strokeDashoffset=len;line2.style.transition='stroke-dashoffset 1.2s cubic-bezier(.45,.1,.25,1)';}catch(e){}
   },300);
-  svgEl('circle',{cx:xs(14),cy:ys(415),r:5,fill:'#0f6b44'},3);
-  txt('+17% in 2025',{x:xs(14)+7,y:ys(415)+4,'font-family':'DM Sans,sans-serif','font-size':10,fill:'#555'},3);
+  svgEl('circle',{cx:xs(14),cy:ys(415),r:5,fill:'#c06b20'},3);
+  txt('+17% in 2025',{x:xs(14)+7,y:ys(415)+4,'font-family':'DM Sans,sans-serif','font-size':10,fill:'#c06b20'},3);
 
   // $500B label — stage 3 (upper center, clear of +17% and AI inflection labels)
-  txt('$500B capex in 2024',{x:xs(11),y:ys(700),'font-family':'DM Sans,sans-serif','font-size':10,fill:'#aaa','font-style':'italic'},3);
+  txt('$500B capex in 2024',{x:xs(11),y:ys(700),'font-family':'DM Sans,sans-serif','font-size':10,fill:'#9e9080','font-style':'italic'},3);
 
   // Projection 2024→2030 — stage 4/5
   let p=`M${xs(14)},${ys(vs[14])}`;
   for(let i=15;i<vs.length;i++) p+=` L${xs(i)},${ys(vs[i])}`;
-  const line3=svgEl('path',{d:p,fill:'none',stroke:'#0f6b44','stroke-width':2.2,'stroke-dasharray':'6,4','stroke-linecap':'round',id:'sline3'},4);
+  const line3=svgEl('path',{d:p,fill:'none',stroke:'#c06b20','stroke-width':2.2,'stroke-dasharray':'6,4','stroke-linecap':'round',id:'sline3'},4);
 
-  svgEl('circle',{cx:xs(20),cy:ys(945),r:6,fill:'#0f6b44'},5);
-  txt('945 TWh',{x:xs(20)+8,y:ys(945)+5,'font-family':'Fraunces,serif','font-size':14,fill:'#0f6b44','font-weight':'700'},5);
+  svgEl('circle',{cx:xs(20),cy:ys(945),r:6,fill:'#c06b20'},5);
+  txt('945 TWh',{x:xs(20)+8,y:ys(945)+5,'font-family':'Fraunces,serif','font-size':14,fill:'#c06b20','font-weight':'700'},5);
 
   // Japan line — stage 5
   const jy=ys(945);
-  svgEl('line',{x1:ml,x2:W-mr,y1:jy,y2:jy,stroke:'#b83c2b','stroke-width':1.5,'stroke-dasharray':'4,3'},5);
-  const jpLblW = 118, jpLblX = W - mr - jpLblW - 24;
-  svgEl('rect',{x:jpLblX, y:jy-17, width:jpLblW, height:14, rx:2, fill:'#b83c2b'},5);
-  txt("Japan's yearly use",{x:jpLblX+7, y:jy-6,'font-family':'DM Sans,sans-serif','font-size':9.5,fill:'#fff','font-weight':'600'},5);
+  svgEl('line',{x1:ml,x2:W-mr,y1:jy,y2:jy,stroke:'#c06b20','stroke-width':1.5,'stroke-dasharray':'4,3'},5);
+  txt("Japan's yearly use",{x:ml+6, y:jy-7,'font-family':'DM Sans,sans-serif','font-size':11.5,fill:'#c06b20','font-weight':'700'},5);
 })();
 
 // ── SCENE STAGE OBSERVER ────────────────────────────
