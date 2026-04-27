@@ -1341,6 +1341,23 @@ html { scroll-behavior:smooth; }
 .g-shifts-cell.level-low  { opacity: .75; }
 .g-shifts-cell.level-mid  { opacity: .9; }
 .g-shifts-cell.level-high { font-weight: 600; color: #0d2d5e; }
+
+/* Agentic stat block */
+.g-agent-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1.5rem; margin: 1.8rem 0 2rem;
+  padding: 1.4rem 0;
+  border-top: 2px solid rgba(28,77,143,.15);
+  border-bottom: 2px solid rgba(28,77,143,.15);
+}
+.g-agent-stat-num {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(1.9rem,3.5vw,2.6rem);
+  color: var(--g); line-height: 1;
+  margin-bottom: .3rem; letter-spacing: -.02em;
+}
+.g-agent-stat-label { font-size: 12.5px; color: #444; line-height: 1.45; }
+.g-agent-stat-sub   { font-size: 11px; color: #999; margin-top: .25rem; }
 .g-shifts-source {
   font-size: 11px; color: var(--faint); margin-top: 1rem;
   font-style: italic; text-align: right;
@@ -2801,7 +2818,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
         <div class="g-shifts-cell-arrow">→</div>
         <div class="g-shifts-cell level-mid">Oversight requires more training. Humans often defer to model outputs.</div>
         <div class="g-shifts-cell-arrow">→</div>
-        <div class="g-shifts-cell level-high">Systems act autonomously at speed. Meaningful oversight becomes a design problem, not a process one.</div>
+        <div class="g-shifts-cell level-high">Systems act autonomously at speed. Meaningful oversight becomes a design problem.</div>
       </div>
 
       <div class="g-shifts-row">
@@ -2944,8 +2961,52 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     <h2 class="g-section-hed appear">The Air Canada case involved a chatbot that gave wrong information. Agentic AI raises a harder question: who is responsible when a system acts on its own?</h2>
 
     <div class="prose">
-      <p>This is where governance gets genuinely hard. Agentic AI systems don&rsquo;t just answer questions — they take actions. They can browse websites, write and run code, send emails, and modify files, often without a human approving each step. In 2025, 79% of organizations had already deployed AI agents in at least one workflow. 80% of them encountered risky or unexpected behavior. Only a third had mature governance frameworks to deal with it.</p>
+      <p>This is where governance gets genuinely hard. Agentic AI systems don&rsquo;t just answer questions — they take actions. They can browse websites, write and run code, send emails, and modify files, often without a human approving each step.</p>
     </div>
+
+    <!-- Agentic stats -->
+    <div class="g-agent-stats appear" id="g-agent-stats">
+      <div>
+        <div class="g-agent-stat-num" id="gstat-a">0%</div>
+        <div class="g-agent-stat-label">of organizations had deployed AI agents in at least one workflow by 2025</div>
+      </div>
+      <div>
+        <div class="g-agent-stat-num" id="gstat-b">0%</div>
+        <div class="g-agent-stat-label">of them encountered risky or unexpected agent behavior</div>
+      </div>
+      <div>
+        <div class="g-agent-stat-num" id="gstat-c">1 in 3</div>
+        <div class="g-agent-stat-label">had mature governance frameworks in place to deal with it</div>
+        
+      </div>
+    </div>
+
+    <script>
+    (function() {
+      var block = document.getElementById('g-agent-stats');
+      if (!block) return;
+      var done = false;
+      function countTo(el, target, suffix, dur) {
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts-start)/dur, 1);
+          var ease = 1 - Math.pow(1-p, 3);
+          el.textContent = Math.floor(ease * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(step);
+      }
+      var obs = new IntersectionObserver(function(e) {
+        if (!e[0].isIntersecting || done) return;
+        done = true; obs.disconnect();
+        countTo(document.getElementById('gstat-a'), 79, '%', 900);
+        setTimeout(function() { countTo(document.getElementById('gstat-b'), 80, '%', 800); }, 180);
+      }, { threshold: 0.4 });
+      obs.observe(block);
+    })();
+    </script>
 
     <!-- Replit incident -->
     <div class="g-incident appear" style="margin:2rem -3vw;display:grid;grid-template-columns:80px 1fr;gap:1.2rem;padding:1.5rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);align-items:start">
