@@ -1131,6 +1131,19 @@ html { scroll-behavior:smooth; }
   letter-spacing:.06em; padding-top:.2rem;
   text-align:right;
 }
+.s-company-stat {
+  font-family:var(--serif); font-weight:700;
+  font-size:clamp(1.6rem,3vw,2.2rem); color:var(--s);
+  line-height:1; letter-spacing:-.02em;
+  margin-bottom:.2rem; display:flex; align-items:baseline; gap:.3rem;
+}
+.s-company-stat-arrow { font-size:.9em; color:#bbb; font-weight:400; }
+.s-company-stat-after { color:#9baf9b; }
+.s-company-stat-label {
+  font-family:var(--sans); font-size:9px; color:#aaa;
+  text-transform:uppercase; letter-spacing:.12em;
+  margin-bottom:.55rem;
+}
 .s-company-name {
   font-family:var(--serif); font-weight:800;
   font-size:clamp(16px,2vw,20px); color:var(--ink);
@@ -2652,6 +2665,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     <h2 class="s-section-hed appear">The companies making that bet explicitly.</h2>
   </div>
 
+  <!-- Detail list -->
   <div class="s-company-list col">
     <div class="s-company">
       <div class="s-company-year">2024</div>
@@ -2689,6 +2703,8 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
       </div>
     </div>
   </div>
+
+
 </div>
 
 <!-- BEAT 6: THE HONEST POSITIVE (S version) -->
