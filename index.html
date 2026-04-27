@@ -440,12 +440,12 @@ body::before {
 .gen-text-wrap { font-size: 13px; line-height: 1.65; color: var(--ink); min-height: 80px; }
 .gen-cursor { display: inline-block; opacity: 1; animation: blink .7s infinite; color: var(--s); font-weight: 300; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.gen-meter-wrap { text-align: center; }
+.gen-meter-wrap { text-align: center; position: relative; }
 .gen-meter-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-bottom: .4rem; }
 .gen-meter-bar-wrap { height: 80px; width: 24px; background: rgba(0,0,0,.07); border-radius: 3px; overflow: hidden; display: flex; align-items: flex-end; margin: 0 auto .4rem; }
 .gen-meter-bar { width: 100%; height: 0%; background: var(--s); transition: height .3s ease; border-radius: 3px; }
 .gen-meter-val { font-family: var(--serif); font-weight: 700; font-size: 1rem; color: var(--ink); font-variant-numeric: tabular-nums; }
-.gen-meter-compare { font-size: 9.5px; color: var(--faint); margin-top: .3rem; line-height: 1.4; }
+.gen-meter-compare { font-size: 9.5px; color: var(--faint); line-height: 1.4; position: absolute; bottom: -1.4em; left: 50%; transform: translateX(-50%); white-space: nowrap; }
 
 /* Agentic */
 .agent-chain { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin: .5rem 0; }
@@ -1856,7 +1856,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
               <div class="gen-meter-compare" id="gen-compare"></div>
             </div>
           </div>
-          <button class="ai-anim-replay" id="gen-replay" onclick="startGenAnim()">↺ Replay</button>
+
         </div>
       </div>
     </div>
@@ -1903,7 +1903,7 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
             <span class="agent-approval-count" id="agent-approval-count">0 / 0 steps</span>
           </div>
           <div class="agent-note" id="agent-note"></div>
-          <button class="ai-anim-replay" id="agent-replay" onclick="startAgentAnim()">↺ Replay</button>
+
         </div>
       </div>
     </div>
@@ -2332,29 +2332,132 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
     </div>
 
     <!-- Four example cards: 2×2 grid -->
-    <div class="appear" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.6rem 0 2rem">
+    <style>.bias-card{background:#fff;border:1px solid #e8e2d9;border-radius:5px;padding:1.1rem 1.2rem}</style>
+    <div id="bias-cards-grid" class="appear" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.6rem 0 2rem">
 
-      <div style="background:#fff;border:1px solid #e8e2d9;border-radius:5px;padding:1.2rem 1.3rem">
+      <!-- COMPAS -->
+      <div class="bias-card">
+        <svg viewBox="0 0 244 66" width="100%" height="66" style="display:block;margin-bottom:.85rem;border-bottom:1px solid #f0ece4;padding-bottom:.6rem">
+          <text x="0" y="9" font-family="DM Sans,sans-serif" font-size="7.5" fill="#777" letter-spacing=".16em" style="text-transform:uppercase">Falsely flagged high-risk</text>
+          <text x="38" y="27" font-family="DM Sans,sans-serif" font-size="10" fill="#333" font-weight="700" text-anchor="end">Black</text>
+          <line id="bb0a" x1="52" y1="22" x2="200" y2="22" stroke="#c2402a" stroke-width="10" stroke-linecap="round" stroke-dasharray="148" stroke-dashoffset="148"/>
+          <text id="bl0a" x="206" y="27" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#c2402a" style="opacity:0">45%</text>
+          <text x="38" y="47" font-family="DM Sans,sans-serif" font-size="10" fill="#333" font-weight="700" text-anchor="end">White</text>
+          <line id="bb0b" x1="52" y1="42" x2="126" y2="42" stroke="#b8b0a4" stroke-width="10" stroke-linecap="round" stroke-dasharray="74" stroke-dashoffset="74"/>
+          <text id="bl0b" x="132" y="47" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#888" style="opacity:0">24%</text>
+          <text id="bn0" x="0" y="63" font-family="Caveat,cursive" font-size="12" fill="#c2402a" style="opacity:0">↑ nearly 2× the false-positive rate</text>
+        </svg>
         <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.6rem">Recidivism scoring &nbsp;/&nbsp; 2000s–present</div>
         <p style="font-size:14px;line-height:1.75;color:#333;margin:0">COMPAS, used by US courts to predict re-offending, was found to <strong>falsely flag Black defendants as high-risk at nearly twice the rate</strong> of white defendants — while both groups had similar actual re-offending rates. Judges used its scores in sentencing. Defendants couldn&rsquo;t see the algorithm.</p>
       </div>
 
-      <div style="background:#fff;border:1px solid #e8e2d9;border-radius:5px;padding:1.2rem 1.3rem">
+      <!-- Amazon -->
+      <div class="bias-card">
+        <svg viewBox="0 0 244 66" width="100%" height="66" style="display:block;margin-bottom:.85rem;border-bottom:1px solid #f0ece4;padding-bottom:.6rem">
+          <text x="0" y="9" font-family="DM Sans,sans-serif" font-size="7.5" fill="#777" letter-spacing=".16em" style="text-transform:uppercase">Resume score (equivalent CVs)</text>
+          <text x="38" y="27" font-family="DM Sans,sans-serif" font-size="10" fill="#333" font-weight="700" text-anchor="end">Male</text>
+          <line id="bb1a" x1="52" y1="22" x2="185" y2="22" stroke="#9baf9b" stroke-width="10" stroke-linecap="round" stroke-dasharray="133" stroke-dashoffset="133"/>
+          <text id="bl1a" x="191" y="27" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#6a8a6a" style="opacity:0">8.2 / 10</text>
+          <text x="38" y="47" font-family="DM Sans,sans-serif" font-size="10" fill="#333" font-weight="700" text-anchor="end">Female</text>
+          <line id="bb1b" x1="52" y1="42" x2="108" y2="42" stroke="#c2402a" stroke-width="10" stroke-linecap="round" stroke-dasharray="56" stroke-dashoffset="56"/>
+          <text id="bl1b" x="114" y="47" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#c2402a" style="opacity:0">3.8 / 10</text>
+          <text id="bn1" x="0" y="63" font-family="Caveat,cursive" font-size="12" fill="#c2402a" style="opacity:0">↓ identical CVs, penalised for gender</text>
+        </svg>
         <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.6rem">Hiring algorithms &nbsp;/&nbsp; 2014–2018</div>
         <p style="font-size:14px;line-height:1.75;color:#333;margin:0">Amazon&rsquo;s resume screener taught itself that <strong>male candidates were preferable</strong> — penalising the word &ldquo;women&rsquo;s,&rdquo; downgrading graduates of women&rsquo;s colleges.<sup><a href="https://www.aclu.org/news/womens-rights/why-amazons-automated-hiring-tool-discriminated-against-women" target="_blank" rel="noopener" class="cite">[25]</a></sup> To their credit, Amazon identified it and scrapped it. Most companies never built that feedback loop.</p>
       </div>
 
-      <div style="background:#fff;border:1px solid #e8e2d9;border-radius:5px;padding:1.2rem 1.3rem">
+      <!-- Arkansas -->
+      <div class="bias-card">
+        <svg viewBox="0 0 244 66" width="100%" height="66" style="display:block;margin-bottom:.85rem;border-bottom:1px solid #f0ece4;padding-bottom:.6rem">
+          <text x="0" y="9" font-family="DM Sans,sans-serif" font-size="7.5" fill="#777" letter-spacing=".16em" style="text-transform:uppercase">Weekly care hours allocated</text>
+          <text x="38" y="27" font-family="DM Sans,sans-serif" font-size="10" fill="#333" font-weight="700" text-anchor="end">Before</text>
+          <line id="bb2a" x1="52" y1="22" x2="205" y2="22" stroke="#9baf9b" stroke-width="10" stroke-linecap="round" stroke-dasharray="153" stroke-dashoffset="153"/>
+          <text id="bl2a" x="211" y="27" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#6a8a6a" style="opacity:0">56 hrs</text>
+          <text x="38" y="47" font-family="DM Sans,sans-serif" font-size="10" fill="#333" font-weight="700" text-anchor="end">After</text>
+          <line id="bb2b" x1="52" y1="42" x2="135" y2="42" stroke="#c2402a" stroke-width="10" stroke-linecap="round" stroke-dasharray="83" stroke-dashoffset="83"/>
+          <text id="bl2b" x="141" y="47" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="700" fill="#c2402a" style="opacity:0">32 hrs &nbsp;−43%</text>
+          <text id="bn2" x="0" y="63" font-family="Caveat,cursive" font-size="12" fill="#c2402a" style="opacity:0">↓ hours cut — no explanation given</text>
+        </svg>
         <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.6rem">Benefits &amp; welfare &nbsp;/&nbsp; 2010s</div>
         <p style="font-size:14px;line-height:1.75;color:#333;margin:0">Arkansas deployed an algorithm to allocate home care hours for disabled and elderly residents. Hours were cut with no explanation. Residents sued. A federal court found the system violated due process. <strong>The state couldn&rsquo;t explain how it worked.</strong></p>
       </div>
 
-      <div style="background:#fff;border:1px solid #e8e2d9;border-radius:5px;padding:1.2rem 1.3rem">
+      <!-- PredPol -->
+      <div class="bias-card">
+        <svg viewBox="0 0 244 66" width="100%" height="66" style="display:block;margin-bottom:.85rem;border-bottom:1px solid #f0ece4;padding-bottom:.6rem">
+          <text x="0" y="9" font-family="DM Sans,sans-serif" font-size="7.5" fill="#777" letter-spacing=".16em" style="text-transform:uppercase">The self-reinforcing loop</text>
+          <rect id="bn3a" x="1" y="19" width="70" height="22" rx="3" fill="#fff5f3" stroke="#c2402a" stroke-width="1.5" style="opacity:.25;transition:opacity .3s ease"/>
+          <text x="36" y="34" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c2402a" font-weight="600" pointer-events="none">More patrols</text>
+          <line id="ba3ab" x1="73" y1="30" x2="80" y2="30" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon id="bh3ab" points="80,26 87,30 80,34" fill="#ddd"/>
+          <rect id="bn3b" x="87" y="19" width="70" height="22" rx="3" fill="#fff5f3" stroke="#c2402a" stroke-width="1.5" style="opacity:.25;transition:opacity .3s ease"/>
+          <text x="122" y="34" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#c2402a" font-weight="600" pointer-events="none">More arrests</text>
+          <line id="ba3bc" x1="159" y1="30" x2="166" y2="30" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"/>
+          <polygon id="bh3bc" points="166,26 173,30 166,34" fill="#ddd"/>
+          <rect id="bn3c" x="173" y="19" width="70" height="22" rx="3" fill="#fff5f3" stroke="#c2402a" stroke-width="1.5" style="opacity:.25;transition:opacity .3s ease"/>
+          <text x="208" y="28" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#c2402a" font-weight="600" pointer-events="none">Prediction</text>
+          <text x="208" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#c2402a" font-weight="600" pointer-events="none">confirmed</text>
+          <path id="ba3ret" d="M 238 43 C 195 62, 49 62, 6 43" fill="none" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <polygon id="bh3ret" points="9,39 3,43 9,47" fill="#ddd"/>
+        </svg>
         <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.6rem">Predictive policing &nbsp;/&nbsp; 2011–2020s</div>
         <p style="font-size:14px;line-height:1.75;color:#333;margin:0">PredPol trained on arrest data from already over-policed neighbourhoods — creating a feedback loop: <strong>more patrols → more arrests → confirmed prediction → more patrols.</strong> Santa Cruz banned it in 2020. Los Angeles scrapped it the same year. The pattern had already spread to dozens of cities.</p>
       </div>
 
     </div>
+    <script>
+    (function(){
+      var grid=document.getElementById('bias-cards-grid');
+      if(!grid)return;
+      var going=false;
+      function start(){
+        if(going)return; going=true;
+        function bar(bid,lid,delay){
+          var b=document.getElementById(bid),l=document.getElementById(lid);
+          if(!b)return;
+          setTimeout(function(){
+            b.style.transition='stroke-dashoffset .52s cubic-bezier(.22,1,.36,1)';
+            b.setAttribute('stroke-dashoffset','0');
+            if(l)setTimeout(function(){l.style.transition='opacity .28s ease';l.style.opacity='1';},560);
+          },delay);
+        }
+        function fade(id,delay){
+          var el=document.getElementById(id);
+          if(!el)return;
+          setTimeout(function(){el.style.transition='opacity .35s ease';el.style.opacity='1';},delay);
+        }
+        bar('bb0a','bl0a',80);  bar('bb0b','bl0b',320); fade('bn0',900);
+        bar('bb1a','bl1a',130); bar('bb1b','bl1b',380); fade('bn1',960);
+        bar('bb2a','bl2a',80);  bar('bb2b','bl2b',580); fade('bn2',1160);
+        // PredPol cycle
+        var nodes=['bn3a','bn3b','bn3c'];
+        var ACT='#c2402a',OFF='#e0d8d0';
+        var step=0,cycles=0;
+        function tick(){
+          nodes.forEach(function(id){var e=document.getElementById(id);if(e)e.style.opacity='.2';});
+          ['ba3ab','ba3bc','ba3ret'].forEach(function(id){var e=document.getElementById(id);if(e)e.setAttribute('stroke',OFF);});
+          ['bh3ab','bh3bc','bh3ret'].forEach(function(id){var e=document.getElementById(id);if(e)e.setAttribute('fill',OFF);});
+          var n=document.getElementById(nodes[step]);if(n)n.style.opacity='1';
+          if(step===1){
+            var l=document.getElementById('ba3ab'),h=document.getElementById('bh3ab');
+            if(l)l.setAttribute('stroke',ACT);if(h)h.setAttribute('fill',ACT);
+          }else if(step===2){
+            var l=document.getElementById('ba3bc'),h=document.getElementById('bh3bc');
+            if(l)l.setAttribute('stroke',ACT);if(h)h.setAttribute('fill',ACT);
+          }else if(step===0&&cycles>0){
+            var l=document.getElementById('ba3ret'),h=document.getElementById('bh3ret');
+            if(l)l.setAttribute('stroke',ACT);if(h)h.setAttribute('fill',ACT);
+          }
+          step=(step+1)%nodes.length;
+          if(step===0)cycles++;
+        }
+        setTimeout(function(){tick();setInterval(tick,850);},250);
+      }
+      var obs=new IntersectionObserver(function(e){if(e[0].isIntersecting){start();obs.disconnect();}},{threshold:.15});
+      obs.observe(grid);
+    })();
+    </script>
 
     <!-- Quote then prose: stacked -->
     <div class="s-quote" style="margin-bottom:1.6rem">
@@ -2403,28 +2506,102 @@ a.cite:hover { text-decoration: underline; opacity: .75; }
 </div>
 
 <!-- Three buckets -->
-<div class="appear" style="display:grid;gap:1px;background:#e4ddd4;border:1px solid #e4ddd4;border-radius:6px;overflow:hidden;margin:1.4rem 0 1.6rem">
+<div class="appear" id="layoff-cards" style="display:grid;gap:1px;background:#e4ddd4;border:1px solid #e4ddd4;border-radius:6px;overflow:hidden;margin:1.4rem 0 1.6rem">
 
   <!-- Bucket 1: Funding the bet -->
   <div style="background:#fdf9f4;padding:1.3rem 1.5rem">
-    <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.55rem">1 &nbsp;/&nbsp; Cutting headcount to fund the infrastructure</div>
+    <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.4rem">1 &nbsp;/&nbsp; Cutting headcount to fund the infrastructure</div>
+    <svg width="100%" viewBox="0 0 260 34" style="display:block;margin-bottom:.65rem;overflow:visible">
+      <text x="0" y="7" font-family="DM Sans,sans-serif" font-size="6.5" fill="#999" letter-spacing=".1em">META 2025: CAPEX UP, HEADCOUNT DOWN</text>
+      <text x="0" y="20" font-family="DM Sans,sans-serif" font-size="9" fill="#333" font-weight="700">Capex ↑</text>
+      <line x1="65" y1="17" x2="192" y2="17" stroke="#f0ebe2" stroke-width="5" stroke-linecap="round"/>
+      <line id="lc1a" x1="65" y1="17" x2="192" y2="17" stroke="#0f6b44" stroke-width="5" stroke-linecap="round" stroke-dasharray="127" stroke-dashoffset="127" opacity=".85"/>
+      <text id="lv1a" x="208" y="21" font-family="DM Sans,sans-serif" font-size="9" fill="#0f6b44" font-weight="700" opacity="0">$65B</text>
+      <text x="0" y="34" font-family="DM Sans,sans-serif" font-size="9" fill="#333" font-weight="700">Jobs ↓</text>
+      <line x1="65" y1="31" x2="192" y2="31" stroke="#f0ebe2" stroke-width="5" stroke-linecap="round"/>
+      <line id="lc1b" x1="65" y1="31" x2="192" y2="31" stroke="#c2402a" stroke-width="5" stroke-linecap="round" stroke-dasharray="127" stroke-dashoffset="127" opacity=".7"/>
+      <text id="lv1b" x="208" y="35" font-family="DM Sans,sans-serif" font-size="9" fill="#c2402a" font-weight="700" opacity="0">3,600</text>
+    </svg>
     <p style="font-size:14.5px;line-height:1.75;color:#333;margin:0">Meta laid off 3,600 people in early 2025 while announcing $65B in AI capex the same year. Google cut 12,000 jobs in 2023 as data center spend accelerated. Infrastructure investment went up; payroll went down to help cover it.</p>
   </div>
 
   <!-- Bucket 2: The believers -->
   <div style="background:#fdf9f4;padding:1.3rem 1.5rem">
-    <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.55rem">2 &nbsp;/&nbsp; Restructuring on a belief about the next three years</div>
+    <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.4rem">2 &nbsp;/&nbsp; Restructuring on a belief about the next three years</div>
+    <svg width="100%" viewBox="0 0 260 34" style="display:block;margin-bottom:.65rem;overflow:visible">
+      <text x="0" y="7" font-family="DM Sans,sans-serif" font-size="6.5" fill="#999" letter-spacing=".1em">THE CONVICTION GAP</text>
+      <text x="0" y="20" font-family="DM Sans,sans-serif" font-size="9" fill="#333" font-weight="700">Evidence</text>
+      <line x1="65" y1="17" x2="192" y2="17" stroke="#f0ebe2" stroke-width="5" stroke-linecap="round"/>
+      <line id="lc2a" x1="65" y1="17" x2="192" y2="17" stroke="#b8b0a4" stroke-width="5" stroke-linecap="round" stroke-dasharray="127" stroke-dashoffset="127" opacity=".8"/>
+      <text id="lv2a" x="208" y="21" font-family="DM Sans,sans-serif" font-size="9" fill="#999" font-weight="700" opacity="0">low</text>
+      <text x="0" y="34" font-family="DM Sans,sans-serif" font-size="9" fill="#333" font-weight="700">Conviction</text>
+      <line x1="65" y1="31" x2="192" y2="31" stroke="#f0ebe2" stroke-width="5" stroke-linecap="round"/>
+      <line id="lc2b" x1="65" y1="31" x2="192" y2="31" stroke="#c2402a" stroke-width="5" stroke-linecap="round" stroke-dasharray="127" stroke-dashoffset="127"/>
+      <text id="lv2b" x="208" y="35" font-family="DM Sans,sans-serif" font-size="9" fill="#c2402a" font-weight="700" opacity="0">high</text>
+    </svg>
     <p style="font-size:14.5px;line-height:1.75;color:#333;margin:0 0 .5rem">Some companies are restructuring ahead of AI capability they expect to arrive — not capability that exists today. The layoffs are real; what&rsquo;s driving them is <em>conviction</em>, not demonstrated performance.</p>
     <div style="font-size:12px;color:var(--muted);font-style:italic">HBR, Jan 2026:<sup><a href="https://hbr.org/2026/01/companies-are-laying-off-workers-because-of-ais-potential-not-its-performance" target="_blank" rel="noopener" class="cite">[28]</a></sup> &ldquo;Companies are laying off because of AI&rsquo;s potential — not its performance.&rdquo;</div>
   </div>
 
   <!-- Bucket 3: AI as cover story -->
   <div style="background:#fdf9f4;padding:1.3rem 1.5rem">
-    <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.55rem">3 &nbsp;/&nbsp; Macro corrections with an AI label attached</div>
+    <div style="font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--s);font-weight:700;margin-bottom:.4rem">3 &nbsp;/&nbsp; Macro corrections with an AI label attached</div>
+    <svg width="100%" viewBox="0 0 260 28" style="display:block;margin-bottom:.65rem;overflow:visible">
+      <text x="0" y="7" font-family="DM Sans,sans-serif" font-size="6.5" fill="#999" letter-spacing=".1em">OF 1.17M 2025 LAYOFFS — SHARE ATTRIBUTED TO AI</text>
+      <line id="lc3b" x1="25" y1="17" x2="235" y2="17" stroke="#e8e3da" stroke-width="6" stroke-linecap="butt" stroke-dasharray="210" stroke-dashoffset="210"/>
+      <line id="lc3a" x1="25" y1="17" x2="235" y2="17" stroke="#c2402a" stroke-width="6" stroke-linecap="butt" stroke-dasharray="210" stroke-dashoffset="210"/>
+      <text id="lv3a" x="25" y="28" font-family="DM Sans,sans-serif" font-size="8.5" fill="#c2402a" font-weight="700" opacity="0">55K AI</text>
+      <text id="lv3b" x="235" y="28" font-family="DM Sans,sans-serif" font-size="8.5" fill="#999" text-anchor="end" opacity="0">1.12M other reasons</text>
+    </svg>
     <p style="font-size:14.5px;line-height:1.75;color:#333;margin:0">Gartner found most 2025 layoffs were driven by interest rates, federal budget cuts, and post-COVID overhiring corrections.<sup><a href="https://www.customerexperiencedive.com/news/ai-isnt-replacing-that-many-jobs-yet/811976/" target="_blank" rel="noopener" class="cite">[29]</a></sup> Only 55K of 1.17M layoffs were explicitly attributed to AI.<sup><a href="https://www.challengergray.com/" target="_blank" rel="noopener" class="cite">[26]</a></sup> &ldquo;AI efficiency&rdquo; is a better investor narrative than &ldquo;we overhired.&rdquo;</p>
   </div>
 
 </div>
+
+<script>
+(function() {
+  var grid = document.getElementById('layoff-cards');
+  if (!grid) return;
+  var obs = new IntersectionObserver(function(e) {
+    if (!e[0].isIntersecting) return;
+    obs.disconnect();
+    function bar(id, offset, delay, dur) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      setTimeout(function() {
+        el.style.transition = 'stroke-dashoffset ' + dur + 's cubic-bezier(.22,1,.36,1)';
+        el.setAttribute('stroke-dashoffset', offset);
+      }, delay);
+    }
+    function fade(id, delay) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      setTimeout(function() {
+        el.style.transition = 'opacity .3s ease';
+        el.style.opacity = '1';
+      }, delay);
+    }
+    // Card 1: capex ~85% of 127px (offset→19), jobs ~40% (offset→76)
+    bar('lc1a', 19, 80, 0.55);   fade('lv1a', 620);
+    bar('lc1b', 76, 240, 0.5);   fade('lv1b', 760);
+    // Card 2: evidence low ~25% of 127px (offset→95), conviction high ~88% (offset→15)
+    bar('lc2a', 95, 130, 0.45);  fade('lv2a', 660);
+    bar('lc2b', 15, 300, 0.55);  fade('lv2b', 840);
+    // Card 3: gray fills 210px centered (offset→0), AI slice 4.7% of 210=~10px (offset→200)
+    bar('lc3b', 0, 180, 0.6);
+    setTimeout(function() {
+      var ai = document.getElementById('lc3a');
+      if (ai) {
+        ai.style.transition = 'stroke-dashoffset .4s cubic-bezier(.22,1,.36,1)';
+        ai.setAttribute('stroke-dashoffset', '200');
+      }
+      fade('lv3a', 100);
+      fade('lv3b', 100);
+    }, 860);
+  }, { threshold: 0.15 });
+  obs.observe(grid);
+})();
+</script>
 
 <div class="prose">
   <p>What makes this hard to track in an ESG context is that the three buckets are almost never disaggregated in company reporting. Workforce disclosures typically show headcount, not rationale. A company that cut 10% of its workforce to fund data center construction looks identical in the data to a company that laid off the same 10% because it overhired in 2021.</p>
@@ -3007,21 +3184,19 @@ function startGenAnim() {
   const meterBar = document.getElementById('gen-meter-bar');
   const whEl = document.getElementById('gen-wh');
   const compare = document.getElementById('gen-compare');
-  const replay = document.getElementById('gen-replay');
   if (!textEl) return;
   if (genTimer) clearInterval(genTimer);
   textEl.textContent = '';
   if (meterBar) meterBar.style.height = '0%';
   if (whEl) whEl.textContent = '0.00';
   if (compare) compare.textContent = '';
-  if (replay) replay.style.display = 'none';
   let i = 0;
   const totalWh = 0.34;
   genTimer = setInterval(() => {
     if (i >= GEN_TEXT.length) {
       clearInterval(genTimer);
-      if (replay) replay.style.display = 'inline-block';
       if (compare) compare.textContent = '11× a Google search';
+      setTimeout(() => startGenAnim(), 3500);
       return;
     }
     i += Math.floor(Math.random() * 3) + 1;
@@ -3059,10 +3234,8 @@ const AGENT_NOTES = [
 let agentTimer = null;
 
 function startAgentAnim() {
-  const replay = document.getElementById('agent-replay');
   const noteEl = document.getElementById('agent-note');
   const approvalEl = document.getElementById('agent-approval-count');
-  if (replay) replay.style.display = 'none';
   if (noteEl) noteEl.textContent = '';
   if (approvalEl) { approvalEl.textContent = '0 / 0 steps'; approvalEl.style.color = 'var(--faint)'; }
   AGENT_STEPS.forEach(s => {
@@ -3096,7 +3269,7 @@ function startAgentAnim() {
           if (el) { el.classList.remove('active'); el.classList.add('done'); }
           if (st) st.textContent = s.done;
           if (approvalEl) approvalEl.textContent = `0 / ${AGENT_STEPS.length} steps`;
-          if (replay) replay.style.display = 'inline-block';
+          setTimeout(() => startAgentAnim(), 4000);
         }, 900);
       }
     }, delay);
@@ -3146,8 +3319,8 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
   ];
 
   // Sequential timing: each row starts after previous fully completes
-  const SEQ_DELAY   = [0, 900, 1800, 2750]; // ms delay before each row starts
-  const BAR_DUR     = [0.55, 0.6, 0.65, 0.8]; // bar draw duration (s)
+  const SEQ_DELAY   = [0, 600, 1200, 1850]; // ms delay before each row starts
+  const BAR_DUR     = [0.45, 0.48, 0.52, 0.65]; // bar draw duration (s)
 
   const LABEL_W = 148;
   const MULT_W  = 52;
@@ -3260,15 +3433,18 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       vg.setAttribute('stroke-dasharray', '2,3'); vg.setAttribute('opacity', '0.35');
       g.appendChild(vg);
 
-      // Bar — starts at 0, animates to dotX
+      // Bar — stroke-dashoffset technique for smooth draw
+      const barLen = dotX - chartL;
       const bar = document.createElementNS(NS, 'line');
-      bar.setAttribute('x1', chartL); bar.setAttribute('x2', chartL);
+      bar.setAttribute('x1', chartL); bar.setAttribute('x2', dotX);
       bar.setAttribute('y1', rowY + 4); bar.setAttribute('y2', rowY + 4);
       bar.setAttribute('stroke', barColor); bar.setAttribute('stroke-width', '3');
       bar.setAttribute('stroke-linecap', 'round'); bar.setAttribute('opacity', '0.85');
-      bar.style.transition = `x2 ${dur}s cubic-bezier(.25,1,.3,1)`;
+      bar.setAttribute('stroke-dasharray', barLen);
+      bar.setAttribute('stroke-dashoffset', barLen);
+      bar.style.transition = `stroke-dashoffset ${dur}s cubic-bezier(.22,1,.36,1)`;
       g.appendChild(bar);
-      setTimeout(() => { bar.setAttribute('x2', dotX); }, delay + 80);
+      setTimeout(() => { bar.setAttribute('stroke-dashoffset', '0'); }, delay + 40);
 
       // Dot
       const dot = document.createElementNS(NS, 'circle');
@@ -3276,12 +3452,10 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       dot.setAttribute('r', DOT_R);
       dot.setAttribute('fill', barColor);
       dot.setAttribute('stroke', '#fdfcf8'); dot.setAttribute('stroke-width', '2');
-      dot.setAttribute('opacity', '0');
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity .2s ease';
       g.appendChild(dot);
-      setTimeout(() => {
-        dot.style.transition = 'opacity .25s ease, r .25s ease';
-        dot.setAttribute('opacity', '1');
-      }, delay + dur * 1000 + 80);
+      setTimeout(() => { dot.style.opacity = '1'; }, delay + dur * 1000 + 40);
 
       // Value label
       const valEl = document.createElementNS(NS, 'text');
@@ -3292,13 +3466,15 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
       valEl.setAttribute('font-size', '13');
       valEl.setAttribute('font-weight', '700');
       valEl.setAttribute('fill', barColor);
-      valEl.setAttribute('opacity', '0');
+      valEl.style.opacity = '0';
+      valEl.style.transform = 'translateY(5px)';
+      valEl.style.transition = 'opacity .3s ease, transform .3s cubic-bezier(.22,1,.36,1)';
       valEl.textContent = d.wh < 1 ? d.wh + ' Wh' : d.wh < 10 ? '~' + d.wh + ' Wh' : 'up to ' + d.wh + ' Wh';
       g.appendChild(valEl);
       setTimeout(() => {
-        valEl.style.transition = 'opacity .35s ease';
-        valEl.setAttribute('opacity', '1');
-      }, delay + dur * 1000 + 200);
+        valEl.style.opacity = '1';
+        valEl.style.transform = 'translateY(0)';
+      }, delay + dur * 1000 + 80);
 
       // Multiplier
       if (d.mult) {
@@ -3308,13 +3484,15 @@ document.querySelectorAll('[data-appear="slab"]').forEach(el => eSlabObs.observe
         multEl.setAttribute('font-size', '11');
         multEl.setAttribute('font-weight', '600');
         multEl.setAttribute('fill', barColor);
-        multEl.setAttribute('opacity', '0');
+        multEl.style.opacity = '0';
+        multEl.style.transform = 'translateX(-4px)';
+        multEl.style.transition = 'opacity .3s ease, transform .3s cubic-bezier(.22,1,.36,1)';
         multEl.textContent = d.mult;
         g.appendChild(multEl);
         setTimeout(() => {
-          multEl.style.transition = 'opacity .35s ease';
-          multEl.setAttribute('opacity', '1');
-        }, delay + dur * 1000 + 300);
+          multEl.style.opacity = '1';
+          multEl.style.transform = 'translateX(0)';
+        }, delay + dur * 1000 + 140);
       }
 
       // Real-world comparison — hidden until hover
